@@ -13,6 +13,7 @@ class Sampel extends CI_Controller {
         $this->status = $this->config->item('status');
         $this->roles = $this->config->item('roles');
         $this->load->library('userlevel');
+        $this->load->library('breadcrumbs');
     }
 
 	public function index()
@@ -39,6 +40,77 @@ class Sampel extends CI_Controller {
                 'isi'   =>  'admin/sampel/v_home',
                 'user' => $this->session->userdata['first_name'],
                 'dataLevel' => $dataLevel,
+            );
+            // var_dump($data);
+            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+        }
+	}
+
+	public function tambah()
+	{
+        $this->breadcrumbs->AddMultipleItems(array(
+        'sampel' => base_url() . 'sampel',
+        'tambah' => base_url() . index_page() . '/tambah'
+        ));
+		//user data from session
+	    $data = $this->session->userdata;
+	    if(empty($data)){
+	        redirect(site_url().'main/login/');
+	    }
+
+	    //check user level
+	    if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+	    $dataLevel = $this->userlevel->checkLevel($data['role']);
+        // var_dump($dataLevel);
+        // die();
+	    //check user level
+        if(empty($this->session->userdata['email'])){
+            redirect(site_url().'main/login/');
+        }else{
+            $data = array(
+				'title' => 'Data Sampel',
+                'isi'   =>  'admin/sampel/v_tambah',
+                'user' => $this->session->userdata['first_name'],
+                'breadcrumbs' => $this->breadcrumbs->render(),
+                'dataLevel' => $dataLevel,
+            );
+            // var_dump($data);
+            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+        }
+	}
+
+    public function edit($no_sampel)
+	{
+        $this->breadcrumbs->AddMultipleItems(array(
+        'sampel' => base_url() . 'sampel',
+        'tambah' => base_url() . index_page() . '/edit'
+        ));
+		//user data from session
+	    $data = $this->session->userdata;
+	    if(empty($data)){
+	        redirect(site_url().'main/login/');
+	    }
+
+	    //check user level
+	    if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+	    $dataLevel = $this->userlevel->checkLevel($data['role']);
+        // var_dump($dataLevel);
+        // die();
+	    //check user level
+        if(empty($this->session->userdata['email'])){
+            redirect(site_url().'main/login/');
+        }else{
+            $data = array(
+				'title' => 'Data Sampel',
+                'isi'   =>  'admin/sampel/v_edit',
+                'user' => $this->session->userdata['first_name'],
+                'breadcrumbs' => $this->breadcrumbs->render(),
+                'dataLevel' => $dataLevel,
+                'cek' => $no_sampel
             );
             // var_dump($data);
             $this->load->view('admin/layout/v_wrapper', $data, FALSE);
