@@ -40,6 +40,7 @@ class Dashboard extends CI_Controller {
                 'isi'   =>  'admin/dashboard/v_home',
                 'user' => $this->session->userdata['first_name'],
                 'dataLevel' => $dataLevel,
+                'jumlah_pengguna' => $this->user_model->getCountData()
             );
             // var_dump($data);
             $this->load->view('admin/layout/v_wrapper', $data, FALSE);

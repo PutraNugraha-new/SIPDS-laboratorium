@@ -34,7 +34,7 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Option</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'pengguna' ? 'active' : '') ?>" href="<?= base_url() ?>main/pengguna">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Data Pengguna
                             </a>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
+                        <div class="small">Login Sebagai:</div>
                         <?= $user; ?>
                     </div>
                 </nav>

@@ -263,6 +263,11 @@ class User_model extends CI_Model {
         $query = $this->db->get('users');
         return $query->result();
     }
+
+    public function getCountData()
+    {   
+        return $this->db->count_all('users');
+    }
     
     //delete user
     public function deleteUser($id)

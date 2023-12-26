@@ -35,7 +35,7 @@
                             </div><div class="col-xl-3 col-md-6">
                                 <div class="card bg-success p-2 text-white mb-4">
                                     <div class="card-body d-flex justify-content-between">
-                                        <h2>7</h2> 
+                                        <h2><?= $jumlah_pengguna ?></h2> 
                                         <h2><i class="fas fa-users me-2"></i></h2>
                                     </div>
                                     <h4>Jumlah Pengguna</h4>

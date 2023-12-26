@@ -46,6 +46,97 @@ class Main extends CI_Controller {
 	{
 		$this->load->view('sampel/index');
 	}
+
+    public function pengguna(){
+        //user data from session
+	    $data = $this->session->userdata;
+	    if(empty($data)){
+	        redirect(site_url().'main/login/');
+	    }
+
+	    //check user level
+	    if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+	    $dataLevel = $this->userlevel->checkLevel($data['role']);
+        // var_dump($dataLevel);
+        // die();
+	    //check user level
+        if(empty($this->session->userdata['email'])){
+            redirect(site_url().'main/login/');
+        }else{
+            $data = array(
+				'title' => 'Data Pengguna',
+                'isi'   =>  'admin/pengguna/v_home',
+                'user' => $this->session->userdata['first_name'],
+                'dataLevel' => $dataLevel,
+                'users' => $this->user_model->getUserData()
+            );
+            // var_dump($data);
+            // die();
+            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+        }
+    }
+
+    public function tambahPengguna(){
+        //user data from session
+	    $data = $this->session->userdata;
+	    if(empty($data)){
+	        redirect(site_url().'main/login/');
+	    }
+
+	    //check user level
+	    if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+	    $dataLevel = $this->userlevel->checkLevel($data['role']);
+        // var_dump($dataLevel);
+        // die();
+	    //check user level
+        if(empty($this->session->userdata['email'])){
+            redirect(site_url().'main/login/');
+        }else{
+            $data = array(
+				'title' => 'Data Pengguna',
+                'isi'   =>  'admin/pengguna/v_tambah',
+                'user' => $this->session->userdata['first_name'],
+                'dataLevel' => $dataLevel,
+            );
+            // var_dump($data);
+            // die();
+            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+        }
+    }
+    public function editPengguna($cek){
+        //user data from session
+	    $data = $this->session->userdata;
+	    if(empty($data)){
+	        redirect(site_url().'main/login/');
+	    }
+
+	    //check user level
+	    if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+	    $dataLevel = $this->userlevel->checkLevel($data['role']);
+        // var_dump($dataLevel);
+        // die();
+	    //check user level
+        if(empty($this->session->userdata['email'])){
+            redirect(site_url().'main/login/');
+        }else{
+            $data = array(
+				'title' => 'Data Pengguna',
+                'isi'   =>  'admin/pengguna/v_edit',
+                'user' => $this->session->userdata['first_name'],
+                'dataLevel' => $dataLevel,
+                'cek' => $cek
+            );
+            // var_dump($data);
+            // die();
+            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+        }
+    }
 	
 	public function checkLoginUser(){
 	     //user data from session
