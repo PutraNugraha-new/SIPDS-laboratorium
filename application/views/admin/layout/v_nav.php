@@ -12,7 +12,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-vials"></i></div>
                                 Data Sampel
                             </a>
-                            <a class="nav-link " href="charts.html">
+                            <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'lhu' ? 'active' : '') ?>" href="<?= base_url() ?>lhu">
                                 <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></div>
                                 Lembar Hasil Uji
                             </a>
