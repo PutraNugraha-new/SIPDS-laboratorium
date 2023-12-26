@@ -2,24 +2,46 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Sampel extends CI_Controller {
+	public $status;
+    public $roles;
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/userguide3/general/urls.html
-	 */
+    function __construct(){
+        parent::__construct();
+        $this->load->model('User_model', 'user_model', TRUE);
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        $this->status = $this->config->item('status');
+        $this->roles = $this->config->item('roles');
+        $this->load->library('userlevel');
+    }
+
 	public function index()
 	{
-		$this->load->view('sampel/index');
+		//user data from session
+	    $data = $this->session->userdata;
+	    if(empty($data)){
+	        redirect(site_url().'main/login/');
+	    }
+
+	    //check user level
+	    if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+	    $dataLevel = $this->userlevel->checkLevel($data['role']);
+        // var_dump($dataLevel);
+        // die();
+	    //check user level
+        if(empty($this->session->userdata['email'])){
+            redirect(site_url().'main/login/');
+        }else{
+            $data = array(
+				'title' => 'Data Sampel',
+                'isi'   =>  'admin/sampel/v_home',
+                'user' => $this->session->userdata['first_name'],
+                'dataLevel' => $dataLevel,
+            );
+            // var_dump($data);
+            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+        }
 	}
 }

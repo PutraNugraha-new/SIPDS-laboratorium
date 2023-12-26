@@ -79,7 +79,7 @@
                 echo form_submit(array('value'=>'Login', 'class'=>'btn btn-danger mx-auto btn-block')); ?>
             <?php echo form_close(); ?>
         </div>
-        <a href="<?= base_url() ?>Sampel" class="text-center mb-2">Status Sampel</a>
+        <a href="<?= base_url() ?>main/sampel" class="text-center mb-2">Status Sampel</a>
     </div>
 </div>
 

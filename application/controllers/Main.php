@@ -41,6 +41,11 @@ class Main extends CI_Controller {
         }
 
 	}
+
+    public function sampel()
+	{
+		$this->load->view('sampel/index');
+	}
 	
 	public function checkLoginUser(){
 	     //user data from session
