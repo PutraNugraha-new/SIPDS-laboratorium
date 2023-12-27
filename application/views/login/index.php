@@ -60,7 +60,7 @@
                 <?php echo form_input(array(
                     'name'=>'email', 
                     'id'=> 'email', 
-                    'placeholder'=>'Username', 
+                    'placeholder'=>'email', 
                     'class'=>'form-control mx-auto',  
                     'value'=> set_value('email'))); ?>
                 <?php echo form_error('email', '<div class="alert alert-danger" role="alert">', '</div>') ?>

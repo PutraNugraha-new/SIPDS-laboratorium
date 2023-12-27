@@ -98,7 +98,7 @@ class User_model extends CI_Model {
         }
     }
     
-    //getUserName
+    //getemail
     public function getUserAllData($email)
     {
         $this->db->select('*');
@@ -175,7 +175,7 @@ class User_model extends CI_Model {
     }
     
     //get user from email
-    public function getUserInfoByEmail($email)
+    public function getUserInfoByemail($email)
     {
         $q = $this->db->get_where('users', array('email' => $email), 1);  
         if($this->db->affected_rows() > 0){
@@ -210,7 +210,8 @@ class User_model extends CI_Model {
                 'email'=>$d['email'],
                 'password'=>$d['password'], 
                 'role'=>$d['role'], 
-                'status'=>$this->status[1]
+                'status'=>$this->status[1],
+                'banned_users'=>$d['banned_users']
             );
             $q = $this->db->insert_string('users',$string);             
             $this->db->query($q);

@@ -21,9 +21,9 @@
                     <?php echo form_input(array('name'=>'nama_perusahaan', 'id'=> 'nama_perusahaan', 'placeholder'=>'Nama Perusahaan', 'class'=>'form-control', 'value' => set_value('nama_perusahaan'))); ?>
                     <?php echo form_error('nama_perusahaan');?>
                     
-                    <label for="tgl_selesai" class="my-2">Tanggal Selesai</label>
-                    <input type="date" name="tgl_selesai" class="form-control" id="tgl_selesai">
-                    <?php echo form_error('tgl_selesai');?>
+                    <label for="tanggal_selesai" class="my-2">Tanggal Selesai</label>
+                    <input type="date" name="tanggal_selesai" class="form-control" id="tanggal_selesai">
+                    <?php echo form_error('tanggal_selesai');?>
                     
                     <label for="file_lhu" class="my-2">Pilih File LHU</label>
                     <input type="file" name="file_lhu" id="file_lhu" class="form-control">

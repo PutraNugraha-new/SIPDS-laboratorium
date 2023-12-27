@@ -174,7 +174,7 @@ class Main extends CI_Controller {
             $this->load->library('email');
             $this->load->library('sendmail');
             $bUrl = base_url();
-            $message = $this->sendmail->secureMail($data['first_name'],$data['last_name'],$data['email'],$dTod,$dTim,$stLe,$browser,$os,$getip,$bUrl);
+            $message = $this->sendmail->securemail($data['first_name'],$data['last_name'],$data['email'],$dTod,$dTim,$stLe,$browser,$os,$getip,$bUrl);
             $to_email = $data['email'];
             $this->email->from($this->config->item('register'), 'New sign-in! from '.$browser.'');
             $this->email->to($to_email);
@@ -291,7 +291,7 @@ class Main extends CI_Controller {
 	    //check is admin or not
 	    if($dataLevel == "is_admin"){
 
-            $this->form_validation->set_rules('email', 'Your Email', 'required');
+            $this->form_validation->set_rules('email', 'Your email', 'required');
             $this->form_validation->set_rules('level', 'User Level', 'required');
 
             if ($this->form_validation->run() == FALSE) {
@@ -332,7 +332,7 @@ class Main extends CI_Controller {
 	    //check is admin or not
 	    if($dataLevel == "is_admin"){
 
-            $this->form_validation->set_rules('email', 'Your Email', 'required');
+            $this->form_validation->set_rules('email', 'Your email', 'required');
             $this->form_validation->set_rules('banuser', 'Ban or Unban', 'required');
 
             if ($this->form_validation->run() == FALSE) {
@@ -374,7 +374,7 @@ class Main extends CI_Controller {
         $data['title'] = "Change Password";
         $this->form_validation->set_rules('firstname', 'First Name', 'required');
         $this->form_validation->set_rules('lastname', 'Last Name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');
 
@@ -468,18 +468,19 @@ class Main extends CI_Controller {
 	    if($dataLevel == "is_admin"){
             $this->form_validation->set_rules('firstname', 'First Name', 'required');
             $this->form_validation->set_rules('lastname', 'Last Name', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('email', 'email', 'required|valid_email');
             $this->form_validation->set_rules('role', 'role', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
             $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');
 
-            $data['title'] = "Add User";
+            $data = array(
+                'title' => 'Tambah Pengguna',
+                'isi'   =>  'admin/pengguna/v_tambah',
+                'user' => $this->session->userdata['first_name'],
+                'dataLevel' => $dataLevel,
+            );
             if ($this->form_validation->run() == FALSE) {
-                $this->load->view('header', $data);
-                $this->load->view('navbar');
-                $this->load->view('container');
-                $this->load->view('adduser', $data);
-                $this->load->view('footer');
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
             }else{
                 if($this->user_model->isDuplicate($this->input->post('email'))){
                     $this->session->set_flashdata('flash_message', 'User email already exists');
@@ -496,14 +497,14 @@ class Main extends CI_Controller {
                     $cleanPost['banned_users'] = 'unban';
                     $cleanPost['password'] = $hashed;
                     unset($cleanPost['passconf']);
-
+                    
                     //insert to database
                     if(!$this->user_model->addUser($cleanPost)){
                         $this->session->set_flashdata('flash_message', 'There was a problem add new user');
                     }else{
                         $this->session->set_flashdata('success_message', 'New user has been added.');
                     }
-                    redirect(site_url().'main/users/');
+                    redirect(site_url().'main/pengguna/');
                 };
             }
 	    }else{
@@ -519,7 +520,7 @@ class Main extends CI_Controller {
         $this->load->library('recaptcha');
         $this->form_validation->set_rules('firstname', 'First Name', 'required');
         $this->form_validation->set_rules('lastname', 'Last Name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
         
         $result = $this->user_model->getAllSettings();
         $sTl = $result->site_title;
@@ -703,7 +704,7 @@ class Main extends CI_Controller {
 	    }else{
 	        $this->load->library('curl');
             $this->load->library('recaptcha');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('email', 'email', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required');
             
             $data['title'] = "Welcome Back!";
@@ -803,7 +804,7 @@ class Main extends CI_Controller {
         $data['title'] = "Forgot Password";
         $this->load->library('curl');
         $this->load->library('recaptcha');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
         
         $result = $this->user_model->getAllSettings();
         $sTl = $result->site_title;
@@ -817,7 +818,7 @@ class Main extends CI_Controller {
         }else{
             $email = $this->input->post('email');
             $clean = $this->security->xss_clean($email);
-            $userInfo = $this->user_model->getUserInfoByEmail($clean);
+            $userInfo = $this->user_model->getUserInfoByemail($clean);
 
             if(!$userInfo){
                 $this->session->set_flashdata('flash_message', 'We cant find your email address');

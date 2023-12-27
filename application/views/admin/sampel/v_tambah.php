@@ -17,9 +17,9 @@
                     <?php echo form_input(array('name'=>'jenis_sampel', 'id'=> 'jenis_sampel', 'placeholder'=>'Jenis Sampel', 'class'=>'form-control', 'value' => set_value('jenis_sampel'))); ?>
                     <?php echo form_error('jenis_sampel');?>
                     
-                    <label for="parameter_uji" class="my-2">Parameter Uji</label>
-                    <?php echo form_input(array('name'=>'parameter_uji', 'id'=> 'parameter_uji', 'placeholder'=>'Parameter Uji', 'class'=>'form-control', 'value' => set_value('parameter_uji'))); ?>
-                    <?php echo form_error('parameter_uji');?>
+                    <label for="parameter_diuji" class="my-2">Parameter Uji</label>
+                    <?php echo form_input(array('name'=>'parameter_diuji', 'id'=> 'parameter_diuji', 'placeholder'=>'Parameter Uji', 'class'=>'form-control', 'value' => set_value('parameter_diuji'))); ?>
+                    <?php echo form_error('parameter_diuji');?>
                     
                     <label for="nama_perusahaan" class="my-2">Nama Perusahaan</label>
                     <?php echo form_input(array('name'=>'nama_perusahaan', 'id'=> 'nama_perusahaan', 'placeholder'=>'Nama Perusahaan', 'class'=>'form-control', 'value' => set_value('nama_perusahaan'))); ?>
@@ -35,9 +35,9 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="no_hp" class="my-2">No Hp</label>
-                    <?php echo form_input(array('name'=>'no_hp', 'id'=> 'no_hp', 'placeholder'=>'Nomor Hp', 'class'=>'form-control', 'value' => set_value('no_hp'))); ?>
-                    <?php echo form_error('no_hp');?>
+                    <label for="no_handphone" class="my-2">No Hp</label>
+                    <?php echo form_input(array('name'=>'no_handphone', 'id'=> 'no_handphone', 'placeholder'=>'Nomor Hp', 'class'=>'form-control', 'value' => set_value('no_handphone'))); ?>
+                    <?php echo form_error('no_handphone');?>
                     
                     <label for="tgl_masuk" class="my-2">Tanggal Masuk</label>
                     <input type="date" name="tgl_masuk" id="tgl_masuk" class="form-control">
