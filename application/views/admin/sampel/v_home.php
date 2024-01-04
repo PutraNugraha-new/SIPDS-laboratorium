@@ -43,24 +43,26 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <?php $no = 1; foreach($sampel as $data): ?>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>System Architect</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>62</td>
-                                            <td>2011/04/25</td>
-                                            <td>2011/04/25</td>
-                                            <td>2011/04/25</td>
+                                            <td><?= $no; ?></td>
+                                            <td><?= $data->no_sampel; ?></td>
+                                            <td><?= $data->jenis_sampel; ?></td>
+                                            <td><?= $data->parameter_diuji; ?></td>
+                                            <td><?= $data->nama_perusahaan; ?></td>
+                                            <td><?= $data->nama_pengantar; ?></td>
+                                            <td><?= $data->alamat; ?></td>
+                                            <td><?= $data->tgl_masuk; ?></td>
+                                            <td><?= $data->tgl_selesai; ?></td>
+                                            <td><?= $data->no_lhu; ?></td>
+                                            <td><?= $data->no_handphone; ?></td>
+                                            <td><?= $data->keterangan; ?></td>
                                             <td>
                                                 <a href="<?= base_url() ?>sampel/edit/<?= 20; ?>" class="btn btn-info p-1 my-1 text-light"><i class="fas fa-pencil"></i></a>
                                                 <a href="" class="btn btn-danger p-1 my-1 text-light"><i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
+                                        <?php $no++; endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
