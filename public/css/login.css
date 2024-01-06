@@ -4,14 +4,14 @@
 }
 
 body{
-    background-color: #29ADB2;
+    background-color: #EBF3E8;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 :root {
-    --main-color: #0766AD;
+    --main-color: #86A789;
     --second-color:#F3F3F3;  
     --putih :#FFFFFF;
     --hitam :#000000;
@@ -23,7 +23,7 @@ body{
     /* background-color: red; */
     text-align: center;
     margin-top: 5em;
-    color: var(--putih);
+    color: var(--main-color);
     font-weight: bold;
     font-family: var(--main-font);
 }
@@ -73,6 +73,7 @@ body{
 
 .form-login .btn {
     background-color: var(--main-color);
+    border: none;
     display: block;
     margin-top: 3em;
     /* margin-bottom: 2em; */

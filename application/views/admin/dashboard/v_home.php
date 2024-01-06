@@ -4,14 +4,14 @@
                         </ol> -->
                         <div class="row my-5">
                             <div class="col-md-3 align-content-center d-flex">
-                                <img src="" alt="Logo" class="mx-auto">
+                                <img src="<?= base_url() ?>public/image/logo-dlh.png" alt="logo-dlh" class="mx-auto" width="140">
                             </div>
-                            <div class="col-md-6 text-center">
+                            <div class="col-md-6 text-center font-weight-bold">
                                 <p>Unit Pelaksana Teknis Daerah Laboratorium Lingkungan Kota Palangkaraya</p>
                                 <p>Jl. Tjilik Riwut, Km 2,5</p>
                             </div>
                             <div class="col-md-3 align-content-center d-flex">
-                                <img src="" alt="logo" class="mx-auto">
+                                <img src="<?= base_url() ?>public/image/logo-dlh.png" alt="logo-dlh" class="mx-auto" width="140">
                             </div>
                         </div>
                         <div class="row d-flex justify-content-evenly">
