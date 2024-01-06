@@ -66,13 +66,18 @@
                     </div>
                     
                     <label for="tgl_selesai" class="my-2">Tanggal Selesai</label>
-                    <input type="date" name="tgl_selesai" id="tgl_selesai" class="form-control">
+                    <input type="datetime-local" name="tgl_selesai" id="tgl_selesai" class="form-control">
                     <div class="text-danger">
                         <?php echo form_error('tgl_selesai');?>
                     </div>
                     
                     <label for="no_lhu" class="my-2">No LHU</label>
-                    <?php echo form_input(array('name'=>'no_lhu', 'id'=> 'no_lhu', 'placeholder'=>'No LHU', 'class'=>'form-control', 'value' => set_value('no_lhu'))); ?>
+                    <select name="no_lhu" class="form-control" id="no_lhu">
+                        <option selected>Pilih No LHU</option>
+                        <?php foreach($lhu as $data): ?>
+                        <option value="<?= $data->no_lhu ?>"><?= $data->no_lhu ?></option>
+                        <?php endforeach; ?>
+                    </select>
                     <div class="text-danger">
                         <?php echo form_error('no_lhu');?>
                     </div>

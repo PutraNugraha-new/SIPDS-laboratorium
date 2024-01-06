@@ -18,7 +18,7 @@
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary p-2 text-white mb-4">
                                     <div class="card-body d-flex justify-content-between">
-                                        <h2>7</h2> 
+                                        <h2><?= $jumlah_sampel ?></h2> 
                                         <h2><i class="fas fa-vials me-2"></i></h2>
                                     </div>
                                     <h4>Jumlah Sampel</h4>
@@ -27,7 +27,7 @@
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning p-2 text-white mb-4">
                                     <div class="card-body d-flex justify-content-between">
-                                        <h2>7</h2> 
+                                        <h2><?= $jumlah_lhu ?></h2> 
                                         <h2><i class="far fa-file-alt me-2"></i></h2>
                                     </div>
                                     <h4>Jumlah Lembar Hasil Uji</h4>

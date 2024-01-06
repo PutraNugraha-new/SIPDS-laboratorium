@@ -5,25 +5,30 @@
     </div>
     <div class="card-body">
         <?php 
-            echo form_open('users/adduser');
+            echo form_open('lhu/update');
         ?>
             <div class="form-row d-flex">
                 <div class="form-group col-md-12 me-1">
                     <label for="no_lhu" class="my-2">No LHU</label>
-                    <?php echo form_input(array('name'=>'no_lhu', 'id'=> 'no_lhu', 'placeholder'=>'Nomor Sampel', 'class'=>'form-control', 'value' => $cek)); ?>
+                    <?php echo form_input(array('type'=>'hidden','name'=>'no_lhu', 'id'=> 'no_lhu', 'placeholder'=>'Nomor Sampel', 'class'=>'form-control', 'value' => $cek->no_lhu)); ?>
                     <?php echo form_error('no_lhu');?>
                     
                     <label for="no_sampel" class="my-2">No Sampel</label>
-                    <?php echo form_input(array('name'=>'no_sampel', 'id'=> 'no_sampel', 'placeholder'=>'No Sampel', 'class'=>'form-control', 'value' => set_value('no_sampel'))); ?>
+                    <select name="no_sampel" id="no_sampel" class="form-control">
+                        <option value="<?= $cek->no_sampel ?>"><?= $cek->no_sampel ?></option>
+                        <?php foreach($list_sampel as $ls): ?>
+                            <option value="<?= $ls->no_sampel ?>"><?= $ls->no_sampel ?></option>
+                        <?php endforeach; ?>
+                    </select>
                     <?php echo form_error('no_sampel');?>
                     
                     <label for="nama_perusahaan" class="my-2">Nama Perusahaan</label>
-                    <?php echo form_input(array('name'=>'nama_perusahaan', 'id'=> 'nama_perusahaan', 'placeholder'=>'Nama Perusahaan', 'class'=>'form-control', 'value' => set_value('nama_perusahaan'))); ?>
+                    <?php echo form_input(array('name'=>'nama_perusahaan', 'id'=> 'nama_perusahaan', 'placeholder'=>'Nama Perusahaan', 'class'=>'form-control', 'value' => $cek->nama_perusahaan)); ?>
                     <?php echo form_error('nama_perusahaan');?>
                     
-                    <label for="tanggal_selesai" class="my-2">Tanggal Selesai</label>
-                    <input type="date" name="tanggal_selesai" class="form-control" id="tanggal_selesai">
-                    <?php echo form_error('tanggal_selesai');?>
+                    <label for="tgl_selesai" class="my-2">Tanggal Selesai</label>
+                    <input type="datetime-local" name="tgl_selesai" class="form-control" id="tgl_selesai" value="<?= $cek->tgl_selesai ?>">
+                    <?php echo form_error('tgl_selesai');?>
                     
                     <label for="file_lhu" class="my-2">Pilih File LHU</label>
                     <input type="file" name="file_lhu" id="file_lhu" class="form-control">

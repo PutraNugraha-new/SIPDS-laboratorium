@@ -48,7 +48,12 @@
                     <?php echo form_error('tgl_selesai');?>
                     
                     <label for="no_lhu" class="my-2">No LHU</label>
-                    <?php echo form_input(array('name'=>'no_lhu', 'id'=> 'no_lhu', 'placeholder'=>'No LHU', 'class'=>'form-control', 'value' => $sampel->no_lhu)); ?>
+                    <select name="no_lhu" class="form-control" id="no_lhu">
+                        <option value="<?= $sampel->no_lhu ?>"><?= $sampel->no_lhu ?></option>
+                        <?php foreach($lhu as $data): ?>
+                        <option value="<?= $data->no_lhu ?>"><?= $data->no_lhu ?></option>
+                        <?php endforeach; ?>
+                    </select>
                     <?php echo form_error('no_lhu');?>
                     
                     <label for="keterangan" class="my-2">keterangan</label>

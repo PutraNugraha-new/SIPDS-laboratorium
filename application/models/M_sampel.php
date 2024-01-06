@@ -38,5 +38,9 @@ class M_sampel extends CI_Model {
 		$this->db->where('no_sampel', $data['no_sampel']);
 		$this->db->delete('tb_sampel',$data);
 	}
+
+    public function getCountData(){
+        return $this->db->count_all("tb_sampel");
+    }
     
 }

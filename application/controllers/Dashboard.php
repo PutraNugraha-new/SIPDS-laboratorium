@@ -9,6 +9,8 @@ class Dashboard extends CI_Controller {
     function __construct(){
         parent::__construct();
         $this->load->model('User_model', 'user_model', TRUE);
+        $this->load->model('M_sampel', 'M_sampel', TRUE);
+        $this->load->model('M_lhu', 'M_lhu', TRUE);
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->status = $this->config->item('status');
@@ -40,7 +42,9 @@ class Dashboard extends CI_Controller {
                 'isi'   =>  'admin/dashboard/v_home',
                 'user' => $this->session->userdata['first_name'],
                 'dataLevel' => $dataLevel,
-                'jumlah_pengguna' => $this->user_model->getCountData()
+                'jumlah_pengguna' => $this->user_model->getCountData(),
+                'jumlah_sampel' => $this->M_sampel->getCountData(),
+                'jumlah_lhu' => $this->M_lhu->getCountData(),
             );
             // var_dump($data);
             $this->load->view('admin/layout/v_wrapper', $data, FALSE);

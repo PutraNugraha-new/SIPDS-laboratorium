@@ -9,6 +9,7 @@ class Sampel extends CI_Controller {
         parent::__construct();
         $this->load->model('User_model', 'user_model', TRUE);
         $this->load->model('M_sampel', 'M_sampel', TRUE);
+        $this->load->model('M_lhu', 'M_lhu', TRUE);
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->status = $this->config->item('status');
@@ -76,6 +77,7 @@ class Sampel extends CI_Controller {
                 'isi'   =>  'admin/sampel/v_tambah',
                 'user' => $this->session->userdata['first_name'],
                 'breadcrumbs' => $this->breadcrumbs->render(),
+                'lhu' => $this->M_lhu->allData(),
                 'dataLevel' => $dataLevel,
             );
             // var_dump($data);
@@ -111,6 +113,7 @@ class Sampel extends CI_Controller {
                 'isi'   =>  'admin/sampel/v_edit',
                 'user' => $this->session->userdata['first_name'],
                 // 'breadcrumbs' => $this->breadcrumbs->render(),
+                'lhu' => $this->M_lhu->allData(),
                 'dataLevel' => $dataLevel,
                 'sampel' => $this->M_sampel->getData($no_sampel)
             );
