@@ -44,6 +44,7 @@ class Dashboard extends CI_Controller {
                 'dataLevel' => $dataLevel,
                 'jumlah_pengguna' => $this->user_model->getCountData(),
                 'jumlah_sampel' => $this->M_sampel->getCountData(),
+                'sampel' => $this->M_sampel->allData(),
                 'jumlah_lhu' => $this->M_lhu->getCountData(),
             );
             // var_dump($data);

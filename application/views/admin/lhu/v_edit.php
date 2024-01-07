@@ -4,8 +4,14 @@
         <h3>Ubah Lembar Hasil Uji</h3>
     </div>
     <div class="card-body">
+        <?php if ($this->session->flashdata('flash_message')): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= $this->session->flashdata('flash_message'); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
         <?php 
-            echo form_open('lhu/update');
+            echo form_open_multipart('lhu/update');
         ?>
             <div class="form-row d-flex">
                 <div class="form-group col-md-12 me-1">
@@ -30,7 +36,7 @@
                     <input type="datetime-local" name="tgl_selesai" class="form-control" id="tgl_selesai" value="<?= $cek->tgl_selesai ?>">
                     <?php echo form_error('tgl_selesai');?>
                     
-                    <label for="file_lhu" class="my-2">Pilih File LHU</label>
+                    <label for="file_lhu" class="my-2">File LHU : <span class="text-success"><?php if($cek->file_lhu == NULL){echo "Tidak Ada File";}else{echo $cek->file_lhu;} ?></span></label>
                     <input type="file" name="file_lhu" id="file_lhu" class="form-control">
                     <?php echo form_error('file_lhu');?>
                 </div>

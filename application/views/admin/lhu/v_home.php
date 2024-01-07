@@ -1,16 +1,14 @@
 <a href="<?= base_url() ?>lhu/tambah" class="btn btn-info text-light mt-4">Tambah Data</a>
 <?php if ($this->session->flashdata('success_message')): ?>
-        <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
-            <?= $this->session->flashdata('success_message'); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <?php if ($this->session->flashdata('flash_message')): ?>
-        <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-            <?= $this->session->flashdata('flash_message'); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <div class="alert alert-success">
+        <?php echo $this->session->flashdata('success_message'); ?>
+    </div>
+<?php endif; ?>
+<?php if ($this->session->flashdata('error_message')): ?>
+    <div class="alert alert-danger">
+        <?php echo $this->session->flashdata('error_message'); ?>
+    </div>
+<?php endif; ?>
     <div class="row my-4">
         <div class="col-md-12">
         <div class="card mb-4">
