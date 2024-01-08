@@ -60,13 +60,13 @@
                     </div>
                     
                     <label for="tgl_masuk" class="my-2">Tanggal Masuk</label>
-                    <input type="datetime-local" name="tgl_masuk" id="tgl_masuk" class="form-control">
+                    <input type="date" name="tgl_masuk" id="tgl_masuk" class="form-control">
                     <div class="text-danger">
                         <?php echo form_error('tgl_masuk');?>
                     </div>
                     
                     <label for="tgl_selesai" class="my-2">Tanggal Selesai</label>
-                    <input type="datetime-local" name="tgl_selesai" id="tgl_selesai" class="form-control">
+                    <input type="date" name="tgl_selesai" id="tgl_selesai" class="form-control">
                     <div class="text-danger">
                         <?php echo form_error('tgl_selesai');?>
                     </div>

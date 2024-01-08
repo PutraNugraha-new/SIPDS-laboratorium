@@ -23,11 +23,11 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">
+                                    <a class="nav-link" href="<?= base_url() ?>sampel/laporan">
                                         <i class="fas fa-vials me-2"></i>
                                         Data Sampel
                                     </a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">
+                                    <a class="nav-link" href="<?= base_url() ?>lhu/laporan">
                                         <i class="far fa-file-alt me-2"></i>
                                         Lembar Hasil Uji
                                     </a>

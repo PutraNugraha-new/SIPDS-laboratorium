@@ -42,5 +42,13 @@ class M_sampel extends CI_Model {
     public function getCountData(){
         return $this->db->count_all("tb_sampel");
     }
+
+    public function get_filtered_data($tgl_awal, $tgl_akhir) {
+        // Fetch filtered data based on start and end date
+        $this->db->where('tgl_masuk >=', $tgl_awal);
+        $this->db->where('tgl_masuk <=', $tgl_akhir);
+        $query = $this->db->get('tb_sampel');
+        return $query->result();
+    }
     
 }
