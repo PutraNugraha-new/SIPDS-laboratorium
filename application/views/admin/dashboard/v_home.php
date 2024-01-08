@@ -4,11 +4,14 @@
                         </ol> -->
                         <div class="row my-5">
                             <div class="col-md-3 align-content-center d-flex">
-                                <img src="<?= base_url() ?>public/image/logo-dlh.png" alt="logo-dlh" class="mx-auto" width="140">
+                                <img src="<?= base_url() ?>public/image/logo-dlh.png" alt="logo-dlh" class="mx-auto img-fluid" width="140">
                             </div>
                             <div class="col-md-6 text-center font-weight-bold">
-                                <p>Unit Pelaksana Teknis Daerah Laboratorium Lingkungan Kota Palangkaraya</p>
-                                <p>Jl. Tjilik Riwut, Km 2,5</p>
+                                <p class="m-0 font-weight-bold">PEMERINTAH KOTA PALANGKARAYA</p>
+                                <P class="m-0 font-weight-bold">DINAS LINGKUNGAN HIDUP</P>
+                                <P class="m-0 font-weight-bold">UNIT PELAKSANA TEKNIS DAERAH (UPTD) LABORATORIUM LINGKUNGAN</P>
+                                <p class="m-0 font-weight-bold">Email : lablingkungan@gmail.com</p>
+                                <p class="m-0 font-weight-bold">Jl. Tjilik Riwut Km. 2,5 Palangka Raya</p>
                             </div>
                             <div class="col-md-3 align-content-center d-flex">
                                 <img src="<?= base_url() ?>public/image/logo-dlh.png" alt="logo-dlh" class="mx-auto" width="140">
@@ -49,7 +52,9 @@
                                         <i class="fas fa-chart-area me-1"></i>
                                         Pengambilan Sampel
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body">
+                                        <canvas id="myChart" width="100%" height="40"></canvas>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -58,7 +63,9 @@
                                         <i class="fas fa-chart-bar me-1"></i>
                                         Pengambilan Sampel
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body">
+                                        <canvas id="myBarChart" width="100%" height="40"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>

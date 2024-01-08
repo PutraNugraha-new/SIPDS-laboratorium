@@ -41,4 +41,12 @@ class M_lhu extends CI_Model {
     public function getCountData(){
         return $this->db->count_all("tb_lhu");
     }
+
+    public function get_filtered_data($tgl_awal, $tgl_akhir) {
+        // Fetch filtered data based on start and end date
+        $this->db->where('tgl_selesai >=', $tgl_awal);
+        $this->db->where('tgl_selesai <=', $tgl_akhir);
+        $query = $this->db->get('tb_lhu');
+        return $query->result();
+    }
 }

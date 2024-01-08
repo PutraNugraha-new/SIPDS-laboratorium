@@ -51,4 +51,11 @@ class M_sampel extends CI_Model {
         return $query->result();
     }
     
+    public function getChartData() {
+        $query = $this->db->select('jenis_sampel, COUNT(*) as jumlah_sampel')
+            ->from('tb_sampel') // Ganti 'nama_tabel' dengan nama tabel Anda
+            ->group_by('jenis_sampel')
+            ->get();
+        return $query->result();
+    }
 }

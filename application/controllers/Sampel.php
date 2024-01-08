@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+require_once FCPATH . 'vendor/autoload.php';
+
 class Sampel extends CI_Controller {
 	public $status;
     public $roles;
@@ -16,6 +20,10 @@ class Sampel extends CI_Controller {
         $this->roles = $this->config->item('roles');
         $this->load->library('userlevel');
         $this->load->library('breadcrumbs');
+
+        $options = new Options();
+        $options->set('defaultFont', 'Times New Roman');
+        $dompdf = new Dompdf($options);
     }
 
 	public function index()
@@ -79,6 +87,56 @@ class Sampel extends CI_Controller {
         }
     }
 
+    public function cetakLaporan(){
+        $data = $this->session->userdata;
+        if(empty($data)){
+            redirect(site_url().'main/login/');
+        }
+    
+        //check user level
+        if(empty($data['role'])){
+            redirect(site_url().'main/login/');
+        }
+        $dataLevel = $this->userlevel->checkLevel($data['role']);
+        // var_dump($dataLevel);
+        // die();
+        //check user level
+        if(empty($this->session->userdata['email'])){
+            redirect(site_url().'main/login/');
+        }else{
+            $tgl_awal = $this->input->get('tgl_awal'); // Menggunakan input get untuk mendapatkan parameter dari URL
+            $tgl_akhir = $this->input->get('tgl_akhir'); // Menggunakan input get untuk mendapatkan parameter dari URL
+
+            if(empty($tgl_awal) && empty($tgl_akhir)){
+                $data = array(
+                    'sampel' => $this->M_sampel->allData(),
+                );
+            }else{
+                $data = array(
+                    'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir),
+                );
+            }
+    
+    
+            // Load library Dompdf
+            $options = new Options();
+            $options->set('isHtml5ParserEnabled', true);
+            $options->set('isPhpEnabled', true);
+    
+            $dompdf = new Dompdf($options);
+    
+            $html = $this->load->view('admin/sampel/cetakLaporan', $data, true);
+            $dompdf->loadHtml($html);
+    
+            $dompdf->setPaper('A4', 'landscape');
+    
+            // Render PDF (stream to browser atau save ke file)
+            $dompdf->render();
+            $dompdf->stream('laporan.pdf', array('Attachment' => 0));
+        }
+    }
+    
+
     public function getData() {
         $data = $this->session->userdata;
 	    if(empty($data)){
@@ -96,8 +154,8 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $tgl_awal = $this->input->post('tgl_awal');
-            $tgl_akhir = $this->input->post('tgl_akhir');
+            $tgl_awal = $this->input->get('tgl_awal');
+            $tgl_akhir = $this->input->get('tgl_akhir');
 
             if(empty($tgl_awal) && empty($tgl_akhir)){
                 $data = array(
