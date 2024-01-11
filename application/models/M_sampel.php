@@ -43,10 +43,25 @@ class M_sampel extends CI_Model {
         return $this->db->count_all("tb_sampel");
     }
 
-    public function get_filtered_data($tgl_awal, $tgl_akhir) {
+    public function get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan) {
         // Fetch filtered data based on start and end date
         $this->db->where('tgl_masuk >=', $tgl_awal);
         $this->db->where('tgl_masuk <=', $tgl_akhir);
+        $this->db->like('nama_perusahaan', $perusahaan);
+        $query = $this->db->get('tb_sampel');
+        return $query->result();
+    }
+    public function get_filtered_dataTgl($tgl_awal, $tgl_akhir) {
+        // Fetch filtered data based on start and end date
+        $this->db->where('tgl_masuk >=', $tgl_awal);
+        $this->db->where('tgl_masuk <=', $tgl_akhir);
+        // $this->db->like('nama_perusahaan', $perusahaan);
+        $query = $this->db->get('tb_sampel');
+        return $query->result();
+    }
+    public function get_filtered_dataPerusahaan($perusahaan) {
+        // Fetch filtered data based on start and end date
+        $this->db->like('nama_perusahaan', $perusahaan);
         $query = $this->db->get('tb_sampel');
         return $query->result();
     }
@@ -57,5 +72,11 @@ class M_sampel extends CI_Model {
             ->group_by('jenis_sampel')
             ->get();
         return $query->result();
+    }
+
+    public function ambilPerusahaan(){
+        $this->db->select('nama_perusahaan');
+        $this->db->from('tb_sampel');
+        return $this->db->get()->result();
     }
 }

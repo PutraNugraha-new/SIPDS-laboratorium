@@ -80,6 +80,7 @@ class Sampel extends CI_Controller {
                 'isi'   =>  'admin/sampel/v_laporan',
                 'user' => $this->session->userdata['first_name'],
                 'sampel' => $this->M_sampel->allData(),
+                'perusahaan' => $this->M_sampel->ambilPerusahaan(),
                 'dataLevel' => $dataLevel,
             );
             // var_dump($data);
@@ -106,14 +107,35 @@ class Sampel extends CI_Controller {
         }else{
             $tgl_awal = $this->input->get('tgl_awal'); // Menggunakan input get untuk mendapatkan parameter dari URL
             $tgl_akhir = $this->input->get('tgl_akhir'); // Menggunakan input get untuk mendapatkan parameter dari URL
+            $perusahaan = $this->input->get('nama_perusahaan');
 
-            if(empty($tgl_awal) && empty($tgl_akhir)){
+            if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
+                // Menampilkan semua data
+                $data = array(
+                    'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
+                );
+            } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
+                // Menampilkan data berdasarkan perusahaan
+                $data = array(
+                    'sampel' => $this->M_sampel->get_filtered_dataPerusahaan($perusahaan),
+                );
+            } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
+                // Menampilkan data berdasarkan rentang tanggal
+                $data = array(
+                    'sampel' => $this->M_sampel->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
+                );
+            } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
+                // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
+                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                redirect('sampel/laporan');
+            } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
+                // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
+                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                redirect('sampel/laporan');
+            } else {
+                // Kondisi default jika tidak ada form yang terisi
                 $data = array(
                     'sampel' => $this->M_sampel->allData(),
-                );
-            }else{
-                $data = array(
-                    'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir),
                 );
             }
     
@@ -156,24 +178,60 @@ class Sampel extends CI_Controller {
         }else{
             $tgl_awal = $this->input->get('tgl_awal');
             $tgl_akhir = $this->input->get('tgl_akhir');
+            $perusahaan = $this->input->get('nama_perusahaan');
 
-            if(empty($tgl_awal) && empty($tgl_akhir)){
+
+            // --------------------
+            if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
+                // Menampilkan semua data
                 $data = array(
                     'title' => 'Data Sampel',
                     'isi'   =>  'admin/sampel/v_laporan',
                     'user' => $this->session->userdata['first_name'],
+                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
+                    'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
+                    'dataLevel' => $dataLevel,
+                );
+            } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
+                // Menampilkan data berdasarkan perusahaan
+                $data = array(
+                    'title' => 'Data Sampel',
+                    'isi'   =>  'admin/sampel/v_laporan',
+                    'user' => $this->session->userdata['first_name'],
+                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
+                    'sampel' => $this->M_sampel->get_filtered_dataPerusahaan($perusahaan),
+                    'dataLevel' => $dataLevel,
+                );
+            } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
+                // Menampilkan data berdasarkan rentang tanggal
+                $data = array(
+                    'title' => 'Data Sampel',
+                    'isi'   =>  'admin/sampel/v_laporan',
+                    'user' => $this->session->userdata['first_name'],
+                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
+                    'sampel' => $this->M_sampel->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
+                    'dataLevel' => $dataLevel,
+                );
+            } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
+                // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
+                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                redirect('sampel/laporan');
+            } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
+                // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
+                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                redirect('sampel/laporan');
+            } else {
+                // Kondisi default jika tidak ada form yang terisi
+                $data = array(
+                    'title' => 'Data Sampel',
+                    'isi'   =>  'admin/sampel/v_laporan',
+                    'user' => $this->session->userdata['first_name'],
+                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
                     'sampel' => $this->M_sampel->allData(),
                     'dataLevel' => $dataLevel,
                 );
-            }else{
-                $data = array(
-                    'title' => 'Data Sampel',
-                    'isi'   =>  'admin/sampel/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir),
-                    'dataLevel' => $dataLevel,
-                );
             }
+            // --------------------
             // $data['sampel'] = $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir);
             // var_dump($data['sampel']);
             // die();
@@ -280,6 +338,7 @@ class Sampel extends CI_Controller {
             $this->form_validation->set_rules('no_handphone', 'Nomor Handphone', 'required');
             $this->form_validation->set_rules('tgl_masuk', 'Tanggal Masuk', 'required');
             $this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required');
+            $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
             // $this->form_validation->set_rules('no_lhu', 'Password Confirmation');
             // $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
@@ -315,9 +374,9 @@ class Sampel extends CI_Controller {
 
                     //insert to database
                     if(!$this->M_sampel->add($tambah)){
-                        $this->session->set_flashdata('flash_message', 'There was a problem add new user');
+                        $this->session->set_flashdata('flash_message', 'Gagal Menambahkan Data Sampel');
                     }else{
-                        $this->session->set_flashdata('success_message', 'New user has been added.');
+                        $this->session->set_flashdata('success_message', 'Berhasil Menambahkan Data Sampel');
                     }
                     redirect(site_url().'sampel');
                 };

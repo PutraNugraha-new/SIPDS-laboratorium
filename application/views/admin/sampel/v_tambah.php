@@ -22,7 +22,13 @@
                     </div>
                     
                     <label for="jenis_sampel" class="my-2">Jenis Sampel</label>
-                    <?php echo form_input(array('name'=>'jenis_sampel', 'id'=> 'jenis_sampel', 'placeholder'=>'Jenis Sampel', 'class'=>'form-control', 'value' => set_value('jenis_sampel'))); ?>
+                    <select name="jenis_sampel" id="jenis_sampel" class="form-control">
+                        <option selected>Pilih Jenis Sampel</option>
+                        <option value="Air Minum">Air Minum</option>
+                        <option value="Air Limbah">Air Limbah</option>
+                        <option value="Air Permukaan">Air Permukaan</option>
+                    </select>
+                    <?php echo form_input(array('name'=>'jenis_sampel', 'id'=> 'jenis_sampel', 'placeholder'=>'Lainnya', 'class'=>'form-control mt-2', 'value' => set_value('jenis_sampel'))); ?>
                     <div class="text-danger">
                         <?php echo form_error('jenis_sampel');?>
                     </div>
@@ -83,7 +89,11 @@
                     </div>
                     
                     <label for="keterangan" class="my-2">keterangan</label>
-                    <?php echo form_input(array('name'=>'keterangan', 'id'=> 'keterangan', 'placeholder'=>'keterangan', 'class'=>'form-control', 'value' => set_value('keterangan'))); ?>
+                    <select name="keterangan" id="keterangan" class="form-control" required>
+                        <option selected>Pilih Keterangan</option>
+                        <option value="Belum Selesai">Belum Selesai</option>
+                        <option value="Selesai">Selesai</option>
+                    </select>
                     <div class="text-danger">
                         <?php echo form_error('keterangan');?>
                     </div>

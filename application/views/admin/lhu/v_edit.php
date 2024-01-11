@@ -15,7 +15,7 @@
         ?>
             <div class="form-row d-flex">
                 <div class="form-group col-md-12 me-1">
-                    <label for="no_lhu" class="my-2">No LHU</label>
+                    <!-- <label for="no_lhu" class="my-2">No LHU</label> -->
                     <?php echo form_input(array('type'=>'hidden','name'=>'no_lhu', 'id'=> 'no_lhu', 'placeholder'=>'Nomor Sampel', 'class'=>'form-control', 'value' => $cek->no_lhu)); ?>
                     <?php echo form_error('no_lhu');?>
                     
@@ -33,7 +33,7 @@
                     <?php echo form_error('nama_perusahaan');?>
                     
                     <label for="tgl_selesai" class="my-2">Tanggal Selesai</label>
-                    <input type="datetime-local" name="tgl_selesai" class="form-control" id="tgl_selesai" value="<?= $cek->tgl_selesai ?>">
+                    <input type="date" name="tgl_selesai" class="form-control" id="tgl_selesai" value="<?= $cek->tgl_selesai ?>">
                     <?php echo form_error('tgl_selesai');?>
                     
                     <label for="file_lhu" class="my-2">File LHU : <span class="text-success"><?php if($cek->file_lhu == NULL){echo "Tidak Ada File";}else{echo $cek->file_lhu;} ?></span></label>
@@ -51,3 +51,26 @@
         <?php echo form_close(); ?>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#no_sampel').change(function () {
+            var noSampel = $(this).val();
+
+            $.ajax({
+                url: '<?php echo base_url("lhu/getDataSampel"); ?>',
+                type:'GET',
+                data:{no_sampel:noSampel},
+                success: function (data) {
+                    var sampelData = JSON.parse(data);
+                    
+                    $('#nama_perusahaan').val(sampelData.nama_perusahaan);
+                    $('#tgl_selesai').val(sampelData.tgl_selesai);
+                },
+            })
+
+            
+        })
+    })
+
+</script>

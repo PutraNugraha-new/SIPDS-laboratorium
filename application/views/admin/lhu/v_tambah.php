@@ -29,15 +29,15 @@
                     <?php echo form_error('no_sampel');?>
                     
                     <label for="nama_perusahaan" class="my-2">Nama Perusahaan</label>
-                    <?php echo form_input(array('name'=>'nama_perusahaan', 'id'=> 'nama_perusahaan', 'placeholder'=>'Nama Perusahaan', 'class'=>'form-control', 'value' => set_value('nama_perusahaan'))); ?>
+                   <input type="text" name="nama_perusahaan" id="nama_perusahaan" placeholder="Nama Perusahaan" class="form-control">
                     <?php echo form_error('nama_perusahaan');?>
                     
                     <label for="tanggal_selesai" class="my-2">Tanggal Selesai</label>
-                    <input type="datetime-local" name="tgl_selesai" class="form-control" id="tanggal_selesai">
+                    <input type="date" name="tgl_selesai" class="form-control" id="tgl_selesai">
                     <?php echo form_error('tanggal_selesai');?>
                     
                     <label for="file_lhu" class="my-2">Pilih File LHU</label>
-                    <input type="file" name="file_lhu" id="file_lhu" class="form-control" accept=".doc, .docx, .pdf, .jpg, .png" required>
+                    <input type="file" name="file_lhu" id="file_lhu" class="form-control" accept=".doc, .docx, .pdf, .jpg, .png">
                     <?php echo form_error('file_lhu');?>
                 </div>
 
@@ -45,9 +45,32 @@
             <div class="row my-3">
                 <div class="col-md-3">
                     <button type="submit" class="btn btn-primary">Tambah</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="reset" id="reset" class="btn btn-danger">Reset</button>
                 </div>
             </div>
         <?php echo form_close(); ?>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#no_sampel').change(function () {
+            var noSampel = $(this).val();
+
+            $.ajax({
+                url: '<?php echo base_url("lhu/getDataSampel"); ?>',
+                type:'GET',
+                data:{no_sampel:noSampel},
+                success: function (data) {
+                    var sampelData = JSON.parse(data);
+                    
+                    $('#nama_perusahaan').val(sampelData.nama_perusahaan);
+                    $('#tgl_selesai').val(sampelData.tgl_selesai);
+                },
+            })
+
+            
+        })
+    })
+
+</script>

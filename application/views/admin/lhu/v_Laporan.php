@@ -3,16 +3,10 @@
         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Cetak Laporan Data Sampel
+                                Cetak Laporan Data LHU
                             </div>
                             <div class="card-body">
-                                <form action="<?= base_url() ?>sampel/getData" method="get">
-                                <?php if ($this->session->flashdata('error')): ?>
-                                    <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
-                                        <?= $this->session->flashdata('error'); ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
+                                <form action="<?= base_url() ?>lhu/getData" method="get">
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="start_date">Tanggal Awal:</label>
@@ -39,56 +33,36 @@
                                         </div>
                                     </div>
                                 </form>
-                                <a href="<?= base_url() ?>sampel/cetakLaporan?tgl_awal=<?= $this->input->get('tgl_awal') ?>&tgl_akhir=<?= $this->input->get('tgl_akhir') ?>&nama_perusahaan=<?= $this->input->get('nama_perusahaan') ?>" class="btn btn-success my-2">Cetak</a>
+                                <a href="<?= base_url() ?>lhu/cetakLaporan?tgl_awal=<?= $this->input->get('tgl_awal') ?>&tgl_akhir=<?= $this->input->get('tgl_akhir') ?>&nama_perusahaan=<?= $this->input->get('nama_perusahaan') ?>" class="btn btn-success my-2">Cetak</a>
 
                                 <table id="datatablesSimple" class="print-visible">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>No Sampel</th>
-                                            <th>Jenis Sampel</th>
-                                            <th>Parameter Uji</th>
-                                            <th>Perusahaan</th>
-                                            <th>Nama Pengantar</th>
-                                            <th>Alamat</th>
-                                            <th>Tgl Masuk</th>
-                                            <th>Tgl Selesai</th>
                                             <th>No LHU</th>
-                                            <th>No Hp</th>
-                                            <th>Keterangan</th>
+                                            <th>No Sampel</th>
+                                            <th>Perusahaan</th>
+                                            <th>Tgl Selesai</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>No Sampel</th>
-                                            <th>Jenis Sampel</th>
-                                            <th>Parameter Uji</th>
-                                            <th>Perusahaan</th>
-                                            <th>Nama Pengantar</th>
-                                            <th>Alamat</th>
-                                            <th>Tgl Masuk</th>
-                                            <th>Tgl Selesai</th>
                                             <th>No LHU</th>
-                                            <th>No Hp</th>
+                                            <th>No Sampel</th>
+                                            <th>Perusahaan</th>
+                                            <th>Tgl Selesai</th>
                                             <th>Keterangan</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php $no = 1; foreach($sampel as $data): ?>
+                                        <?php $no = 1; foreach($lhu as $data): ?>
                                         <tr>
                                             <td><?= $no; ?></td>
-                                            <td><?= $data->no_sampel; ?></td>
-                                            <td><?= $data->jenis_sampel; ?></td>
-                                            <td><?= $data->parameter_diuji; ?></td>
-                                            <td><?= $data->nama_perusahaan; ?></td>
-                                            <td><?= $data->nama_pengantar; ?></td>
-                                            <td><?= $data->alamat; ?></td>
-                                            <td><?= $data->tgl_masuk; ?></td>
-                                            <td><?= $data->tgl_selesai; ?></td>
                                             <td><?= $data->no_lhu; ?></td>
-                                            <td><?= $data->no_handphone; ?></td>
-                                            <td><?= $data->keterangan; ?></td>
+                                            <td><?= $data->no_sampel; ?></td>
+                                            <td><?= $data->nama_perusahaan; ?></td>
+                                            <td><?= $data->tgl_selesai; ?></td>
                                         </tr>
                                         <?php $no++; endforeach; ?>
                                     </tbody>

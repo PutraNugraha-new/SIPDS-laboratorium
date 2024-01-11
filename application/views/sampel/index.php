@@ -29,11 +29,13 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach($sampel as $data): ?>
                     <tr>
-                        <td>aa</td>
-                        <td>aa</td>
-                        <td>aa</td>
+                        <td><?= $data->no_sampel ?></td>
+                        <td><?= $data->nama_perusahaan ?></td>
+                        <td><?= $data->keterangan ?></td>
                     </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
         <button onclick="goBack()" class="btn btn-info">Kembali</button>

@@ -9,6 +9,7 @@ class Main extends CI_Controller {
     function __construct(){
         parent::__construct();
         $this->load->model('User_model', 'user_model', TRUE);
+        $this->load->model('M_sampel', 'M_sampel', TRUE);
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->status = $this->config->item('status');
@@ -44,7 +45,10 @@ class Main extends CI_Controller {
 
     public function sampel()
 	{
-		$this->load->view('sampel/index');
+        $data = array(
+            'sampel' => $this->M_sampel->allData()
+        );
+		$this->load->view('sampel/index', $data);
 	}
 
     public function pengguna(){

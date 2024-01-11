@@ -23,6 +23,7 @@
         <script src="<?= base_url() ?>public/dashboard/js/datatables-simple-demo.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="<?= base_url() ?>/public/extensions/jquery/jquery.min.js"></script>
 
         <script>
         const ctx = document.getElementById('myChart');

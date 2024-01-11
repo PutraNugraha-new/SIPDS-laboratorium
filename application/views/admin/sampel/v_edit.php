@@ -57,7 +57,11 @@
                     <?php echo form_error('no_lhu');?>
                     
                     <label for="keterangan" class="my-2">keterangan</label>
-                    <?php echo form_input(array('name'=>'keterangan', 'id'=> 'keterangan', 'placeholder'=>'keterangan', 'class'=>'form-control', 'value' => $sampel->keterangan)); ?>
+                    <select name="keterangan" id="keterangan" class="form-control">
+                        <option value="<?= $sampel->keterangan ?>"><?= $sampel->keterangan ?></option>
+                        <option value="Belum Selesai">Belum Selesai</option>
+                        <option value="Selesai">Selesai</option>
+                    </select>
                     <?php echo form_error('keterangan');?>
                 </div>
             </div>

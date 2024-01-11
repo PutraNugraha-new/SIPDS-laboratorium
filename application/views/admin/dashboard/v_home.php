@@ -4,7 +4,7 @@
                         </ol> -->
                         <div class="row my-5">
                             <div class="col-md-3 align-content-center d-flex">
-                                <img src="<?= base_url() ?>public/image/logo-dlh.png" alt="logo-dlh" class="mx-auto img-fluid" width="140">
+                                <img src="<?= base_url() ?>public/image/pemkot.png" alt="logo-dlh" class="mx-auto img-fluid" width="140">
                             </div>
                             <div class="col-md-6 text-center font-weight-bold">
                                 <p class="m-0 font-weight-bold">PEMERINTAH KOTA PALANGKARAYA</p>
