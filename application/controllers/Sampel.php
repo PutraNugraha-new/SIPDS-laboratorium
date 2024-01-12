@@ -45,15 +45,21 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $data = array(
-				'title' => 'Data Sampel',
-                'isi'   =>  'admin/sampel/v_home',
-                'user' => $this->session->userdata['first_name'],
-                'sampel' => $this->M_sampel->allData(),
-                'dataLevel' => $dataLevel,
-            );
-            // var_dump($data);
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            if($dataLevel == "is_admin"){
+                $data = array(
+                    'title' => 'Data Sampel',
+                    'isi'   =>  'admin/sampel/v_home',
+                    'user' => $this->session->userdata['first_name'],
+                    'sampel' => $this->M_sampel->allData(),
+                    'dataLevel' => $dataLevel,
+                );
+                // var_dump($data);
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
+            }
         }
 	}
 
@@ -75,16 +81,22 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $data = array(
-				'title' => 'Data Sampel',
-                'isi'   =>  'admin/sampel/v_laporan',
-                'user' => $this->session->userdata['first_name'],
-                'sampel' => $this->M_sampel->allData(),
-                'perusahaan' => $this->M_sampel->ambilPerusahaan(),
-                'dataLevel' => $dataLevel,
-            );
-            // var_dump($data);
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            if($dataLevel == "is_admin"){
+                $data = array(
+                    'title' => 'Data Sampel',
+                    'isi'   =>  'admin/sampel/v_laporan',
+                    'user' => $this->session->userdata['first_name'],
+                    'sampel' => $this->M_sampel->allData(),
+                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
+                    'dataLevel' => $dataLevel,
+                );
+                // var_dump($data);
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
+            }
         }
     }
 
@@ -105,56 +117,62 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $tgl_awal = $this->input->get('tgl_awal'); // Menggunakan input get untuk mendapatkan parameter dari URL
-            $tgl_akhir = $this->input->get('tgl_akhir'); // Menggunakan input get untuk mendapatkan parameter dari URL
-            $perusahaan = $this->input->get('nama_perusahaan');
-
-            if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
-                // Menampilkan semua data
-                $data = array(
-                    'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
-                );
-            } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
-                // Menampilkan data berdasarkan perusahaan
-                $data = array(
-                    'sampel' => $this->M_sampel->get_filtered_dataPerusahaan($perusahaan),
-                );
-            } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
-                // Menampilkan data berdasarkan rentang tanggal
-                $data = array(
-                    'sampel' => $this->M_sampel->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
-                );
-            } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
-                // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
-                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
-                redirect('sampel/laporan');
-            } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
-                // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
-                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
-                redirect('sampel/laporan');
-            } else {
-                // Kondisi default jika tidak ada form yang terisi
-                $data = array(
-                    'sampel' => $this->M_sampel->allData(),
-                );
+            if($dataLevel == "is_admin"){
+                $tgl_awal = $this->input->get('tgl_awal'); // Menggunakan input get untuk mendapatkan parameter dari URL
+                $tgl_akhir = $this->input->get('tgl_akhir'); // Menggunakan input get untuk mendapatkan parameter dari URL
+                $perusahaan = $this->input->get('nama_perusahaan');
+    
+                if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
+                    // Menampilkan semua data
+                    $data = array(
+                        'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
+                    );
+                } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
+                    // Menampilkan data berdasarkan perusahaan
+                    $data = array(
+                        'sampel' => $this->M_sampel->get_filtered_dataPerusahaan($perusahaan),
+                    );
+                } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
+                    // Menampilkan data berdasarkan rentang tanggal
+                    $data = array(
+                        'sampel' => $this->M_sampel->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
+                    );
+                } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
+                    // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
+                    $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                    redirect('sampel/laporan');
+                } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
+                    // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
+                    $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                    redirect('sampel/laporan');
+                } else {
+                    // Kondisi default jika tidak ada form yang terisi
+                    $data = array(
+                        'sampel' => $this->M_sampel->allData(),
+                    );
+                }
+        
+        
+                // Load library Dompdf
+                $options = new Options();
+                $options->set('isHtml5ParserEnabled', true);
+                $options->set('isPhpEnabled', true);
+        
+                $dompdf = new Dompdf($options);
+        
+                $html = $this->load->view('admin/sampel/cetakLaporan', $data, true);
+                $dompdf->loadHtml($html);
+        
+                $dompdf->setPaper('A4', 'landscape');
+        
+                // Render PDF (stream to browser atau save ke file)
+                $dompdf->render();
+                $dompdf->stream('laporan.pdf', array('Attachment' => 0));
+            }else{
+                
+                redirect('dashboard','refresh');
+                
             }
-    
-    
-            // Load library Dompdf
-            $options = new Options();
-            $options->set('isHtml5ParserEnabled', true);
-            $options->set('isPhpEnabled', true);
-    
-            $dompdf = new Dompdf($options);
-    
-            $html = $this->load->view('admin/sampel/cetakLaporan', $data, true);
-            $dompdf->loadHtml($html);
-    
-            $dompdf->setPaper('A4', 'landscape');
-    
-            // Render PDF (stream to browser atau save ke file)
-            $dompdf->render();
-            $dompdf->stream('laporan.pdf', array('Attachment' => 0));
         }
     }
     
@@ -176,66 +194,73 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $tgl_awal = $this->input->get('tgl_awal');
-            $tgl_akhir = $this->input->get('tgl_akhir');
-            $perusahaan = $this->input->get('nama_perusahaan');
+            if($dataLevel == "is_admin"){
 
-
-            // --------------------
-            if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
-                // Menampilkan semua data
-                $data = array(
-                    'title' => 'Data Sampel',
-                    'isi'   =>  'admin/sampel/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
-                    'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
-                    'dataLevel' => $dataLevel,
-                );
-            } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
-                // Menampilkan data berdasarkan perusahaan
-                $data = array(
-                    'title' => 'Data Sampel',
-                    'isi'   =>  'admin/sampel/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
-                    'sampel' => $this->M_sampel->get_filtered_dataPerusahaan($perusahaan),
-                    'dataLevel' => $dataLevel,
-                );
-            } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
-                // Menampilkan data berdasarkan rentang tanggal
-                $data = array(
-                    'title' => 'Data Sampel',
-                    'isi'   =>  'admin/sampel/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
-                    'sampel' => $this->M_sampel->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
-                    'dataLevel' => $dataLevel,
-                );
-            } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
-                // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
-                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
-                redirect('sampel/laporan');
-            } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
-                // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
-                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
-                redirect('sampel/laporan');
-            } else {
-                // Kondisi default jika tidak ada form yang terisi
-                $data = array(
-                    'title' => 'Data Sampel',
-                    'isi'   =>  'admin/sampel/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'perusahaan' => $this->M_sampel->ambilPerusahaan(),
-                    'sampel' => $this->M_sampel->allData(),
-                    'dataLevel' => $dataLevel,
-                );
+                $tgl_awal = $this->input->get('tgl_awal');
+                $tgl_akhir = $this->input->get('tgl_akhir');
+                $perusahaan = $this->input->get('nama_perusahaan');
+    
+    
+                // --------------------
+                if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
+                    // Menampilkan semua data
+                    $data = array(
+                        'title' => 'Data Sampel',
+                        'isi'   =>  'admin/sampel/v_laporan',
+                        'user' => $this->session->userdata['first_name'],
+                        'perusahaan' => $this->M_sampel->ambilPerusahaan(),
+                        'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
+                        'dataLevel' => $dataLevel,
+                    );
+                } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
+                    // Menampilkan data berdasarkan perusahaan
+                    $data = array(
+                        'title' => 'Data Sampel',
+                        'isi'   =>  'admin/sampel/v_laporan',
+                        'user' => $this->session->userdata['first_name'],
+                        'perusahaan' => $this->M_sampel->ambilPerusahaan(),
+                        'sampel' => $this->M_sampel->get_filtered_dataPerusahaan($perusahaan),
+                        'dataLevel' => $dataLevel,
+                    );
+                } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
+                    // Menampilkan data berdasarkan rentang tanggal
+                    $data = array(
+                        'title' => 'Data Sampel',
+                        'isi'   =>  'admin/sampel/v_laporan',
+                        'user' => $this->session->userdata['first_name'],
+                        'perusahaan' => $this->M_sampel->ambilPerusahaan(),
+                        'sampel' => $this->M_sampel->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
+                        'dataLevel' => $dataLevel,
+                    );
+                } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
+                    // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
+                    $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                    redirect('sampel/laporan');
+                } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
+                    // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
+                    $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                    redirect('sampel/laporan');
+                } else {
+                    // Kondisi default jika tidak ada form yang terisi
+                    $data = array(
+                        'title' => 'Data Sampel',
+                        'isi'   =>  'admin/sampel/v_laporan',
+                        'user' => $this->session->userdata['first_name'],
+                        'perusahaan' => $this->M_sampel->ambilPerusahaan(),
+                        'sampel' => $this->M_sampel->allData(),
+                        'dataLevel' => $dataLevel,
+                    );
+                }
+                // --------------------
+                // $data['sampel'] = $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir);
+                // var_dump($data['sampel']);
+                // die();
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
             }
-            // --------------------
-            // $data['sampel'] = $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir);
-            // var_dump($data['sampel']);
-            // die();
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
         }
     }
 
@@ -262,16 +287,23 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $data = array(
-				'title' => 'Data Sampel',
-                'isi'   =>  'admin/sampel/v_tambah',
-                'user' => $this->session->userdata['first_name'],
-                'breadcrumbs' => $this->breadcrumbs->render(),
-                'lhu' => $this->M_lhu->allData(),
-                'dataLevel' => $dataLevel,
-            );
-            // var_dump($data);
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            if($dataLevel == "is_admin"){
+
+                $data = array(
+                    'title' => 'Data Sampel',
+                    'isi'   =>  'admin/sampel/v_tambah',
+                    'user' => $this->session->userdata['first_name'],
+                    'breadcrumbs' => $this->breadcrumbs->render(),
+                    'lhu' => $this->M_lhu->allData(),
+                    'dataLevel' => $dataLevel,
+                );
+                // var_dump($data);
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
+            }
         }
 	}
 
@@ -298,18 +330,24 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $data = array(
-				'title' => 'Data Sampel',
-                'isi'   =>  'admin/sampel/v_edit',
-                'user' => $this->session->userdata['first_name'],
-                // 'breadcrumbs' => $this->breadcrumbs->render(),
-                'lhu' => $this->M_lhu->allData(),
-                'dataLevel' => $dataLevel,
-                'sampel' => $this->M_sampel->getData($no_sampel)
-            );
-            // var_dump($data);
-            // die();
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            if($dataLevel == "is_admin"){
+                $data = array(
+                    'title' => 'Data Sampel',
+                    'isi'   =>  'admin/sampel/v_edit',
+                    'user' => $this->session->userdata['first_name'],
+                    // 'breadcrumbs' => $this->breadcrumbs->render(),
+                    'lhu' => $this->M_lhu->allData(),
+                    'dataLevel' => $dataLevel,
+                    'sampel' => $this->M_sampel->getData($no_sampel)
+                );
+                // var_dump($data);
+                // die();
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
+            }
         }
 	}
 
@@ -330,14 +368,14 @@ class Sampel extends CI_Controller {
 	    //check is admin or not
 	    if($dataLevel == "is_admin"){
             $this->form_validation->set_rules('no_sampel', 'Nomor Sampel', 'required');
-            $this->form_validation->set_rules('jenis_sampel', 'Jenis Sampel', 'required');
+            // $this->form_validation->set_rules('jenis_sampel', 'Jenis Sampel', 'required');
             $this->form_validation->set_rules('parameter_diuji', 'Parameter Diuji', 'required');
             $this->form_validation->set_rules('nama_perusahaan', 'Nama Perusahaan', 'required');
             $this->form_validation->set_rules('nama_pengantar', 'Nama Pengantar', 'required');
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
             $this->form_validation->set_rules('no_handphone', 'Nomor Handphone', 'required');
             $this->form_validation->set_rules('tgl_masuk', 'Tanggal Masuk', 'required');
-            $this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required');
+            // $this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required');
             $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
             // $this->form_validation->set_rules('no_lhu', 'Password Confirmation');
             // $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
@@ -358,8 +396,9 @@ class Sampel extends CI_Controller {
                     $this->session->set_flashdata('flash_message', 'Nomor Sampel already exists');
                     redirect(site_url().'sampel/tambah');
                 }else{
+                    $clean_noSampel =preg_replace('/\s+/', '', $this->input->post('no_sampel'));
                     $tambah = [
-                        'no_sampel' => $this->input->post('no_sampel'),
+                        'no_sampel' => $clean_noSampel,
                         'jenis_sampel' => $this->input->post('jenis_sampel'),
                         'parameter_diuji' => $this->input->post('parameter_diuji'),
                         'nama_perusahaan' => $this->input->post('nama_perusahaan'),
@@ -373,11 +412,8 @@ class Sampel extends CI_Controller {
                     ];
 
                     //insert to database
-                    if(!$this->M_sampel->add($tambah)){
-                        $this->session->set_flashdata('flash_message', 'Gagal Menambahkan Data Sampel');
-                    }else{
-                        $this->session->set_flashdata('success_message', 'Berhasil Menambahkan Data Sampel');
-                    }
+                    $this->M_sampel->add($tambah);
+                    $this->session->set_flashdata('success_message', 'Berhasil Menambahkan Data Sampel');
                     redirect(site_url().'sampel');
                 };
             }
@@ -409,7 +445,7 @@ class Sampel extends CI_Controller {
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
             $this->form_validation->set_rules('no_handphone', 'Nomor Handphone', 'required');
             $this->form_validation->set_rules('tgl_masuk', 'Tanggal Masuk', 'required');
-            $this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required');
+            // $this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required');
             // $this->form_validation->set_rules('no_lhu', 'Password Confirmation');
             // $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
@@ -458,9 +494,15 @@ class Sampel extends CI_Controller {
 
     public function hapus($no_sampel)
 	{
-		$data = array('no_sampel' => $no_sampel);
-		$this->M_sampel->delete($data);
-		$this->session->set_flashdata('success_message', 'Data Berhasil Dihapus');
-		redirect('sampel', 'refresh');
+        if($dataLevel == "is_admin"){
+            $data = array('no_sampel' => $no_sampel);
+            $this->M_sampel->delete($data);
+            $this->session->set_flashdata('success_message', 'Data Berhasil Dihapus');
+            redirect('sampel', 'refresh');
+        }else{
+            
+            redirect('dashboard','refresh');
+            
+        }
 	}
 }

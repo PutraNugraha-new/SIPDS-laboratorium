@@ -19,7 +19,7 @@ class UserLevel{
             }
             elseif($role == 2)
             {
-                $userLevel = 'is_author';
+                $userLevel = 'is_user';
             }
             elseif($role == 3)
             {

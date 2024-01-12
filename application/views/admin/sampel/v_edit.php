@@ -40,11 +40,11 @@
                     <?php echo form_error('no_handphone');?>
                     
                     <label for="tgl_masuk" class="my-2">Tanggal Masuk</label>
-                    <input type="datetime-local" name="tgl_masuk" id="tgl_masuk" class="form-control" value="<?= $sampel->tgl_masuk ?>">
+                    <input type="date" name="tgl_masuk" id="tgl_masuk" class="form-control" value="<?= $sampel->tgl_masuk ?>">
                     <?php echo form_error('tgl_masuk');?>
                     
                     <label for="tgl_selesai" class="my-2">Tanggal Selesai</label>
-                    <input type="datetime-local" name="tgl_selesai" id="tgl_selesai" class="form-control" value="<?= $sampel->tgl_selesai ?>">
+                    <input type="date" name="tgl_selesai" id="tgl_selesai" class="form-control" value="<?= $sampel->tgl_selesai ?>">
                     <?php echo form_error('tgl_selesai');?>
                     
                     <label for="no_lhu" class="my-2">No LHU</label>
@@ -59,6 +59,7 @@
                     <label for="keterangan" class="my-2">keterangan</label>
                     <select name="keterangan" id="keterangan" class="form-control">
                         <option value="<?= $sampel->keterangan ?>"><?= $sampel->keterangan ?></option>
+                        <!-- <option value=""></option> -->
                         <option value="Belum Selesai">Belum Selesai</option>
                         <option value="Selesai">Selesai</option>
                     </select>

@@ -447,7 +447,7 @@ class Main extends CI_Controller {
     		{
     		    $this->session->set_flashdata('success_message', 'Delete user was successful.');
     		}
-    		redirect(site_url().'main/users/');
+    		redirect(site_url().'main/pengguna/');
 	    }else{
 		    redirect(site_url().'main/');
 	    }
@@ -472,7 +472,7 @@ class Main extends CI_Controller {
 	    if($dataLevel == "is_admin"){
             $this->form_validation->set_rules('firstname', 'First Name', 'required');
             $this->form_validation->set_rules('lastname', 'Last Name', 'required');
-            $this->form_validation->set_rules('email', 'email', 'required|valid_email');
+            $this->form_validation->set_rules('email', 'email', 'required');
             $this->form_validation->set_rules('role', 'role', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
             $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');

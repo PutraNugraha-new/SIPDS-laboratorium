@@ -38,7 +38,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Data Pengguna
                             </a>
-                            <a class="nav-link text-danger" href="<?php echo base_url().'main/logout' ?>">
+                            <a class="nav-link text-danger" href="<?php echo base_url().'main/logout' ?>" onClick="return confirm('Apakah Anda Ingin Keluar Aplikasi ?')">
                                 <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt text-danger"></i></div>
                                 Logout
                             </a>

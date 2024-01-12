@@ -9,8 +9,8 @@
         ?>
             <div class="form-row d-flex">
                 <div class="form-group col-md-12 me-1">
-                    <label for="username" class="my-2">Email</label>
-                    <?php echo form_input(array('name'=>'email', 'id'=> 'email', 'placeholder'=>'Email', 'class'=>'form-control', 'value'=> set_value('email'))); ?>
+                    <label for="username" class="my-2">Username</label>
+                    <?php echo form_input(array('name'=>'email', 'id'=> 'email', 'placeholder'=>'Username', 'class'=>'form-control', 'value'=> set_value('email'))); ?>
                     <?php echo form_error('email');?>
                     
                     <label for="password" class="my-2">Password</label>
@@ -33,9 +33,7 @@
                     <?php
                         $dd_list = array(
                                 '1'   => 'Admin',
-                                '2'   => 'Author',
-                                '3'   => 'Editor',
-                                '4'   => 'Subscriber',
+                                '2'   => 'User',
                                 );
                         $dd_name = "role";
                         echo form_dropdown($dd_name, $dd_list, set_value($dd_name),'class = "form-control" id="role"');
