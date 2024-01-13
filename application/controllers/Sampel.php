@@ -84,7 +84,7 @@ class Sampel extends CI_Controller {
             if($dataLevel == "is_admin"){
                 $data = array(
                     'title' => 'Data Sampel',
-                    'isi'   =>  'admin/sampel/v_laporan',
+                    'isi'   =>  'admin/sampel/v_Laporan',
                     'user' => $this->session->userdata['first_name'],
                     'sampel' => $this->M_sampel->allData(),
                     'perusahaan' => $this->M_sampel->ambilPerusahaan(),
@@ -206,7 +206,7 @@ class Sampel extends CI_Controller {
                     // Menampilkan semua data
                     $data = array(
                         'title' => 'Data Sampel',
-                        'isi'   =>  'admin/sampel/v_laporan',
+                        'isi'   =>  'admin/sampel/v_Laporan',
                         'user' => $this->session->userdata['first_name'],
                         'perusahaan' => $this->M_sampel->ambilPerusahaan(),
                         'sampel' => $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
@@ -216,7 +216,7 @@ class Sampel extends CI_Controller {
                     // Menampilkan data berdasarkan perusahaan
                     $data = array(
                         'title' => 'Data Sampel',
-                        'isi'   =>  'admin/sampel/v_laporan',
+                        'isi'   =>  'admin/sampel/v_Laporan',
                         'user' => $this->session->userdata['first_name'],
                         'perusahaan' => $this->M_sampel->ambilPerusahaan(),
                         'sampel' => $this->M_sampel->get_filtered_dataPerusahaan($perusahaan),
@@ -226,7 +226,7 @@ class Sampel extends CI_Controller {
                     // Menampilkan data berdasarkan rentang tanggal
                     $data = array(
                         'title' => 'Data Sampel',
-                        'isi'   =>  'admin/sampel/v_laporan',
+                        'isi'   =>  'admin/sampel/v_Laporan',
                         'user' => $this->session->userdata['first_name'],
                         'perusahaan' => $this->M_sampel->ambilPerusahaan(),
                         'sampel' => $this->M_sampel->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
@@ -244,7 +244,7 @@ class Sampel extends CI_Controller {
                     // Kondisi default jika tidak ada form yang terisi
                     $data = array(
                         'title' => 'Data Sampel',
-                        'isi'   =>  'admin/sampel/v_laporan',
+                        'isi'   =>  'admin/sampel/v_Laporan',
                         'user' => $this->session->userdata['first_name'],
                         'perusahaan' => $this->M_sampel->ambilPerusahaan(),
                         'sampel' => $this->M_sampel->allData(),
@@ -393,7 +393,7 @@ class Sampel extends CI_Controller {
                 // die();
             }else{
                 if($this->M_sampel->isDuplicate($this->input->post('no_sampel'))){
-                    $this->session->set_flashdata('flash_message', 'Nomor Sampel already exists');
+                    $this->session->set_flashdata('flash_message', 'Nomor Sampel Sudah Terpakai');
                     redirect(site_url().'sampel/tambah');
                 }else{
                     $clean_noSampel =preg_replace('/\s+/', '', $this->input->post('no_sampel'));
@@ -481,8 +481,6 @@ class Sampel extends CI_Controller {
 
                     //update to database
                     if($this->M_sampel->edit($edit)){
-                        $this->session->set_flashdata('flash_message', 'gagal Edit data');
-                    }else{
                         $this->session->set_flashdata('success_message', 'Berhasil Edit Data.');
                     }
                     redirect(site_url().'sampel');
@@ -494,6 +492,16 @@ class Sampel extends CI_Controller {
 
     public function hapus($no_sampel)
 	{
+	    $data = $this->session->userdata;
+        if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+
+        //check user level
+	    if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+	    $dataLevel = $this->userlevel->checkLevel($data['role']);
         if($dataLevel == "is_admin" || $dataLevel == "is_user"){
             $data = array('no_sampel' => $no_sampel);
             $this->M_sampel->delete($data);

@@ -24,7 +24,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?= base_url() ?>sampel/laporan">
+                                    <a class="nav-link" href="<?= base_url('sampel/laporan') ?>">
                                         <i class="fas fa-vials me-2"></i>
                                         Data Sampel
                                     </a>

@@ -82,7 +82,7 @@ class Lhu extends CI_Controller {
             if($dataLevel == "is_admin"){
                 $data = array(
                     'title' => 'Data LHU',
-                    'isi'   =>  'admin/lhu/v_laporan',
+                    'isi'   =>  'admin/lhu/v_Laporan',
                     'user' => $this->session->userdata['first_name'],
                     'lhu' => $this->M_lhu->allData(),
                     'dataLevel' => $dataLevel,
@@ -124,7 +124,7 @@ class Lhu extends CI_Controller {
                     // Menampilkan semua data
                     $data = array(
                         'title' => 'Data lhu',
-                        'isi'   =>  'admin/lhu/v_laporan',
+                        'isi'   =>  'admin/lhu/v_Laporan',
                         'user' => $this->session->userdata['first_name'],
                         'perusahaan' => $this->M_lhu->ambilPerusahaan(),
                         'lhu' => $this->M_lhu->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
@@ -134,7 +134,7 @@ class Lhu extends CI_Controller {
                     // Menampilkan data berdasarkan perusahaan
                     $data = array(
                         'title' => 'Data lhu',
-                        'isi'   =>  'admin/lhu/v_laporan',
+                        'isi'   =>  'admin/lhu/v_Laporan',
                         'user' => $this->session->userdata['first_name'],
                         'perusahaan' => $this->M_lhu->ambilPerusahaan(),
                         'lhu' => $this->M_lhu->get_filtered_dataPerusahaan($perusahaan),
@@ -144,7 +144,7 @@ class Lhu extends CI_Controller {
                     // Menampilkan data berdasarkan rentang tanggal
                     $data = array(
                         'title' => 'Data lhu',
-                        'isi'   =>  'admin/lhu/v_laporan',
+                        'isi'   =>  'admin/lhu/v_Laporan',
                         'user' => $this->session->userdata['first_name'],
                         'perusahaan' => $this->M_lhu->ambilPerusahaan(),
                         'lhu' => $this->M_lhu->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
@@ -162,7 +162,7 @@ class Lhu extends CI_Controller {
                     // Kondisi default jika tidak ada form yang terisi
                     $data = array(
                         'title' => 'Data lhu',
-                        'isi'   =>  'admin/lhu/v_laporan',
+                        'isi'   =>  'admin/lhu/v_Laporan',
                         'user' => $this->session->userdata['first_name'],
                         'perusahaan' => $this->M_lhu->ambilPerusahaan(),
                         'lhu' => $this->M_lhu->allData(),
@@ -507,6 +507,16 @@ class Lhu extends CI_Controller {
 
     public function hapus($no_lhu)
 	{
+	    $data = $this->session->userdata;
+        if (empty($data['role'])) {
+            redirect(site_url() . 'main/login/');
+        }
+
+        // Periksa level pengguna
+        if (empty($data['role'])) {
+            redirect(site_url() . 'main/login/');
+        }
+        $dataLevel = $this->userlevel->checkLevel($data['role']);
         if($dataLevel == "is_admin"){
             $ambil = $this->M_lhu->getData($no_lhu);
             $name = './file_lhu/'.$ambil->file_lhu;
@@ -525,6 +535,16 @@ class Lhu extends CI_Controller {
 	}
 
     public function unduh($nama_file){
+        $data = $this->session->userdata;
+        if (empty($data['role'])) {
+            redirect(site_url() . 'main/login/');
+        }
+
+        // Periksa level pengguna
+        if (empty($data['role'])) {
+            redirect(site_url() . 'main/login/');
+        }
+        $dataLevel = $this->userlevel->checkLevel($data['role']);
         if($dataLevel == "is_admin"){
             $this->load->helper('download');
             $file = FCPATH . 'file_lhu/' . $nama_file ;
@@ -546,6 +566,16 @@ class Lhu extends CI_Controller {
     }
 
     public function getDataSampel(){
+        $data = $this->session->userdata;
+        if (empty($data['role'])) {
+            redirect(site_url() . 'main/login/');
+        }
+
+        // Periksa level pengguna
+        if (empty($data['role'])) {
+            redirect(site_url() . 'main/login/');
+        }
+        $dataLevel = $this->userlevel->checkLevel($data['role']);
         if($dataLevel == "is_admin"){
             $no_sampel = $this->input->get('no_sampel');
             $sampel_data = $this->M_lhu->getSampelData($no_sampel);

@@ -311,4 +311,10 @@ class User_model extends CI_Model {
         }        
         return true;
     }
+
+    public function edit($data)
+    {
+        $this->db->where('id',$data['id']);
+        $this->db->update('users',$data);
+    }
 }

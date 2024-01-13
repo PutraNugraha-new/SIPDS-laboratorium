@@ -23,7 +23,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Email</th>
+                                <th>Username</th>
+                                <th>Password</th>
                                 <th>Nama Pengguna</th>
                                 <th>Role</th>
                                 <th>Terakhir login</th>
@@ -33,7 +34,8 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Email</th>
+                                <th>Username</th>
+                                <th>Password</th>
                                 <th>Nama Pengguna</th>
                                 <th>Role</th>
                                 <th>Terakhir Login</th>
@@ -53,11 +55,12 @@
                             <tr>
                                 <td><?= $no ?></td>
                                 <td><?= $data->email ?></td>
-                                <td><?= $data->first_name ?> <?= $data->last_name ?></td>
+                                <td><?= $data->password ?></td>
+                                <td><?= $data->first_name ?></td>
                                 <td><?= $rolename?></td>
                                 <td><?= $data->last_login?></td>
                                 <td>
-                                    <a href="<?= base_url() ?>main/editPengguna/<?= 20; ?>" class="btn btn-info p-1 my-1 text-light"><i class="fas fa-pencil"></i></a>
+                                    <a href="<?= base_url() ?>main/editPengguna/<?= $data->id; ?>" class="btn btn-info p-1 my-1 text-light"><i class="fas fa-pencil"></i></a>
                                     <a href="<?= base_url() ?>main/deleteuser/<?= $data->id ?>" onClick="return confirm('Yaking Ingin Menghapus?')" class="btn btn-danger p-1 my-1 text-light"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>

@@ -5,25 +5,32 @@
     </div>
     <div class="card-body">
         <?php 
-            echo form_open('users/adduser');
+            echo form_open('main/update');
         ?>
             <div class="form-row d-flex">
+                <input type="hidden" name="id" value="<?= $cek->id ?>">
                 <div class="form-group col-md-12 me-1">
-                    <label for="username" class="my-2">Username</label>
-                    <?php echo form_input(array('name'=>'username', 'id'=> 'username', 'placeholder'=>'Username', 'class'=>'form-control', 'value' => $cek)); ?>
-                    <?php echo form_error('username');?>
+                    <label for="email" class="my-2">Username</label>
+                    <?php echo form_input(array('name'=>'email', 'id'=> 'email', 'placeholder'=>'username', 'class'=>'form-control', 'value' => $cek->email)); ?>
+                    <?php echo form_error('email');?>
                     
-                    <label for="password" class="my-2">Password</label>
-                    <?php echo form_input(array('name'=>'password', 'id'=> 'password', 'placeholder'=>'Password', 'class'=>'form-control', 'value' => set_value('password'))); ?>
-                    <?php echo form_error('password');?>
-                    
-                    <label for="status" class="my-2">Status</label>
-                    <?php echo form_input(array('name'=>'status', 'id'=> 'status', 'placeholder'=>'Status', 'class'=>'form-control', 'value' => set_value('status'))); ?>
+                    <label for="role" class="my-2">Status</label>
+                    <select name="role" id="role" class="form-control">
+                        <?php if($cek->role == '1'){
+                            $role = 'Admin';
+                        }else{
+                            $role = 'User';
+                        }
+                        ?>
+                        <option value="<?= $cek->role ?>"><?= $role ?></option>
+                        <option value="1">Admin</option>
+                        <option value="2">User</option>
+                    </select>
                     <?php echo form_error('status');?>
                     
-                    <label for="nama_pengguna" class="my-2">Nama Pengguna</label>
-                    <?php echo form_input(array('name'=>'nama_pengguna', 'id'=> 'nama_pengguna', 'placeholder'=>'nama_pengguna', 'class'=>'form-control', 'value' => set_value('nama_pengguna'))); ?>
-                    <?php echo form_error('nama_pengguna');?>
+                    <label for="first_name" class="my-2">Nama Pengguna</label>
+                    <?php echo form_input(array('name'=>'first_name', 'id'=> 'first_name', 'placeholder'=>'Nama Pengguna', 'class'=>'form-control', 'value' => $cek->first_name)); ?>
+                    <?php echo form_error('first_name');?>
                 </div>
 
             </div>

@@ -44,8 +44,8 @@
             </div>
             <div class="row my-3">
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                    <button type="reset" id="reset" class="btn btn-danger">Reset</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="reset" id="reset" class="btn btn-danger">Batal</button>
                 </div>
             </div>
         <?php echo form_close(); ?>
@@ -56,16 +56,16 @@
     $(document).ready(function () {
         $('#no_sampel').change(function () {
             var noSampel = $(this).val();
-
             $.ajax({
                 url: '<?php echo base_url("lhu/getDataSampel"); ?>',
                 type:'GET',
                 data:{no_sampel:noSampel},
                 success: function (data) {
+                    console.log(data);
                     var sampelData = JSON.parse(data);
-                    
                     $('#nama_perusahaan').val(sampelData.nama_perusahaan);
                     $('#tgl_selesai').val(sampelData.tgl_selesai);
+                    
                 },
             })
 

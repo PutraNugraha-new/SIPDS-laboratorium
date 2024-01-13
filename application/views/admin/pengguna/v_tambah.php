@@ -16,10 +16,18 @@
                     <label for="password" class="my-2">Password</label>
                     <?php echo form_password(array('name'=>'password', 'id'=> 'password', 'placeholder'=>'Password', 'class'=>'form-control', 'value' => set_value('password'))); ?>
                     <?php echo form_error('password') ?>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="showPassword">
+                        <label class="form-check-label" for="showPassword">Show Password</label>
+                    </div>
 
                     <label for="password" class="my-2">Konfirmasi Password</label>
                     <?php echo form_password(array('name'=>'passconf', 'id'=> 'passconf', 'placeholder'=>'Confirm Password', 'class'=>'form-control', 'value'=> set_value('passconf'))); ?>
                     <?php echo form_error('passconf') ?>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="showPasswordconf">
+                        <label class="form-check-label" for="showPassword">Show Password</label>
+                    </div>
                     
                     <label for="firstname" class="my-2">Nama Awal</label>
                     <?php echo form_input(array('name'=>'firstname', 'id'=> 'firstname', 'placeholder'=>'firstname', 'class'=>'form-control', 'value' => set_value('firstname'))); ?>
@@ -43,10 +51,34 @@
             </div>
             <div class="row my-3">
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="reset" class="btn btn-danger">Batal</button>
                 </div>
             </div>
         <?php echo form_close(); ?>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#showPassword').change(function () {
+            var passwordField = $('#password');
+            if($(this).prop('checked')){
+                passwordField.attr('type', 'text');
+            }else{
+                passwordField.attr('type', 'password');
+            }
+        })
+    })
+</script>
+<script>
+    $(document).ready(function () {
+        $('#showPasswordconf').change(function () {
+            var passwordField = $('#passconf');
+            if($(this).prop('checked')){
+                passwordField.attr('type', 'text');
+            }else{
+                passwordField.attr('type', 'password');
+            }
+        })
+    })
+</script>

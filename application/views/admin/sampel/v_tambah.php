@@ -101,8 +101,8 @@
             </div>
             <div class="row my-3">
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="reset" class="btn btn-danger">Batal</button>
                 </div>
             </div>
         <?php echo form_close(); ?>

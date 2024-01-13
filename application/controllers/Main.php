@@ -129,17 +129,66 @@ class Main extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
+
             $data = array(
 				'title' => 'Data Pengguna',
                 'isi'   =>  'admin/pengguna/v_edit',
                 'user' => $this->session->userdata['first_name'],
                 'dataLevel' => $dataLevel,
-                'cek' => $cek
+                'cek' => $this->user_model->getUserInfo($cek),
             );
             // var_dump($data);
             // die();
             $this->load->view('admin/layout/v_wrapper', $data, FALSE);
         }
+    }
+
+    public function update(){
+        $data = $this->session->userdata;
+        if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+
+        //check user level
+	    if(empty($data['role'])){
+	        redirect(site_url().'main/login/');
+	    }
+	    $dataLevel = $this->userlevel->checkLevel($data['role']);
+	    //check user level
+
+	    //check is admin or not
+	    if($dataLevel == "is_admin"){
+            $this->form_validation->set_rules('id', 'ID', 'required');
+            $this->form_validation->set_rules('email', 'email', 'required');
+            $this->form_validation->set_rules('role', 'Role', 'required');
+            $this->form_validation->set_rules('first_name', 'Nama Pengguna', 'required');
+
+            if ($this->form_validation->run() == FALSE) {
+                
+                redirect('main/editPengguna','refresh');
+                
+                // die();
+            }else{
+                $id = $this->input->post('id');
+                    $edit = [
+                        'id' => $id,
+                        'email' => $this->input->post('email'),
+                        'role' => $this->input->post('role'),
+                        'first_name' => $this->input->post('first_name'),
+                    ];
+
+                    // var_dump($edit);
+                    // die();
+
+                    //update to database
+                    if($this->user_model->edit($edit)){
+                        $this->session->set_flashdata('success_message', 'Berhasil Edit Data.');
+                    }
+                    redirect(site_url().'main/pengguna');
+            }
+	    }else{
+	        redirect(site_url().'main/');
+	    }
     }
 	
 	public function checkLoginUser(){
@@ -175,16 +224,28 @@ class Main extends CI_Controller {
         $getAccess = get_cookie($neMSC);
 	    
         if(!$getAccess && $setLogin["name"] == $neMSC){
-            $this->load->library('email');
+            // Konfigurasi SMTP untuk Gmail
+            $config = array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'smtp.gmail.com',
+                'smtp_port' =>  465,
+                'smtp_user' => 'simpandrive803@gmail.com', // Gantilah dengan alamat email Gmail Anda
+                'smtp_pass' => 'sampit2019', // Gantilah dengan password Gmail Anda
+                'mailtype' => 'html',
+                'charset' => 'utf-8'
+            );
+             $this->load->library('email', $config);
             $this->load->library('sendmail');
             $bUrl = base_url();
             $message = $this->sendmail->securemail($data['first_name'],$data['last_name'],$data['email'],$dTod,$dTim,$stLe,$browser,$os,$getip,$bUrl);
             $to_email = $data['email'];
-            $this->email->from($this->config->item('register'), 'New sign-in! from '.$browser.'');
+            $this->email->from($this->config->item('register'), 'New sign-in! from ' . $browser . '');
             $this->email->to($to_email);
-            $this->email->subject('New sign-in! from '.$browser.'');
+            $this->email->subject('New sign-in! from ' . $browser . '');
             $this->email->message($message);
             $this->email->set_mailtype("html");
+        
+            // Kirim email menggunakan SMTP
             $this->email->send();
             
             $this->input->set_cookie($setLogin, TRUE);
@@ -441,11 +502,11 @@ class Main extends CI_Controller {
     		$this->user_model->deleteUser($id);
     		if($this->user_model->deleteUser($id) == FALSE )
     		{
-    		    $this->session->set_flashdata('flash_message', 'Error, cant delete the user!');
+    		    $this->session->set_flashdata('flash_message', 'Error, tidak dapat menghapus pengguna!');
     		}
     		else
     		{
-    		    $this->session->set_flashdata('success_message', 'Delete user was successful.');
+    		    $this->session->set_flashdata('success_message', 'pengguna berhasil dihapus.');
     		}
     		redirect(site_url().'main/pengguna/');
 	    }else{
@@ -487,7 +548,7 @@ class Main extends CI_Controller {
                 $this->load->view('admin/layout/v_wrapper', $data, FALSE);
             }else{
                 if($this->user_model->isDuplicate($this->input->post('email'))){
-                    $this->session->set_flashdata('flash_message', 'User email already exists');
+                    $this->session->set_flashdata('flash_message', 'Username sudah digunakan');
                     redirect(site_url().'main/adduser');
                 }else{
                     $this->load->library('password');
@@ -504,9 +565,9 @@ class Main extends CI_Controller {
                     
                     //insert to database
                     if(!$this->user_model->addUser($cleanPost)){
-                        $this->session->set_flashdata('flash_message', 'There was a problem add new user');
+                        $this->session->set_flashdata('flash_message', 'ada masalah ketika menambahkan data');
                     }else{
-                        $this->session->set_flashdata('success_message', 'New user has been added.');
+                        $this->session->set_flashdata('success_message', 'Pengguna berhasil ditambahkan.');
                     }
                     redirect(site_url().'main/pengguna/');
                 };
