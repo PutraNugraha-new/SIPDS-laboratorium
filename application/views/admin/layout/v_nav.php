@@ -12,6 +12,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-vials"></i></div>
                                 Data Sampel
                             </a>
+                            <?php if($this->session->userdata['role'] == "1") : ?>
                             <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'lhu' ? 'active' : '') ?>" href="<?= base_url() ?>lhu">
                                 <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></div>
                                 Lembar Hasil Uji
@@ -38,6 +39,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Data Pengguna
                             </a>
+                            <?php endif; ?>
                             <a class="nav-link text-danger" href="<?php echo base_url().'main/logout' ?>" onClick="return confirm('Apakah Anda Ingin Keluar Aplikasi ?')">
                                 <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt text-danger"></i></div>
                                 Logout

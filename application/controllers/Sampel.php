@@ -45,7 +45,7 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            if($dataLevel == "is_admin"){
+            if($dataLevel == "is_admin"  || $dataLevel == "is_user"){
                 $data = array(
                     'title' => 'Data Sampel',
                     'isi'   =>  'admin/sampel/v_home',
@@ -287,7 +287,7 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            if($dataLevel == "is_admin"){
+            if($dataLevel == "is_admin" || $dataLevel == "is_user"){
 
                 $data = array(
                     'title' => 'Data Sampel',
@@ -330,7 +330,7 @@ class Sampel extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            if($dataLevel == "is_admin"){
+            if($dataLevel == "is_admin" || $dataLevel == "is_user"){
                 $data = array(
                     'title' => 'Data Sampel',
                     'isi'   =>  'admin/sampel/v_edit',
@@ -366,7 +366,7 @@ class Sampel extends CI_Controller {
 	    //check user level
 
 	    //check is admin or not
-	    if($dataLevel == "is_admin"){
+	    if($dataLevel == "is_admin" || $dataLevel == "is_user"){
             $this->form_validation->set_rules('no_sampel', 'Nomor Sampel', 'required');
             // $this->form_validation->set_rules('jenis_sampel', 'Jenis Sampel', 'required');
             $this->form_validation->set_rules('parameter_diuji', 'Parameter Diuji', 'required');
@@ -436,7 +436,7 @@ class Sampel extends CI_Controller {
 	    //check user level
 
 	    //check is admin or not
-	    if($dataLevel == "is_admin"){
+	    if($dataLevel == "is_admin" || $dataLevel == "is_user"){
             $this->form_validation->set_rules('no_sampel', 'Nomor Sampel', 'required');
             $this->form_validation->set_rules('jenis_sampel', 'Jenis Sampel', 'required');
             $this->form_validation->set_rules('parameter_diuji', 'Parameter Diuji', 'required');
@@ -494,7 +494,7 @@ class Sampel extends CI_Controller {
 
     public function hapus($no_sampel)
 	{
-        if($dataLevel == "is_admin"){
+        if($dataLevel == "is_admin" || $dataLevel == "is_user"){
             $data = array('no_sampel' => $no_sampel);
             $this->M_sampel->delete($data);
             $this->session->set_flashdata('success_message', 'Data Berhasil Dihapus');

@@ -45,15 +45,19 @@ class Lhu extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $data = array(
-				'title' => 'Data lhu',
-                'isi'   =>  'admin/lhu/v_home',
-                'user' => $this->session->userdata['first_name'],
-                'lhu' => $this->M_lhu->allData(),
-                'dataLevel' => $dataLevel,
-            );
-            // var_dump($data);
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            if($dataLevel == "is_admin"){
+                $data = array(
+                    'title' => 'Data lhu',
+                    'isi'   =>  'admin/lhu/v_home',
+                    'user' => $this->session->userdata['first_name'],
+                    'lhu' => $this->M_lhu->allData(),
+                    'dataLevel' => $dataLevel,
+                );
+                // var_dump($data);
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                redirect('dashboard','refresh');
+            }
         }
 	}
 
@@ -75,15 +79,21 @@ class Lhu extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $data = array(
-				'title' => 'Data LHU',
-                'isi'   =>  'admin/lhu/v_laporan',
-                'user' => $this->session->userdata['first_name'],
-                'lhu' => $this->M_lhu->allData(),
-                'dataLevel' => $dataLevel,
-            );
-            // var_dump($data);
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            if($dataLevel == "is_admin"){
+                $data = array(
+                    'title' => 'Data LHU',
+                    'isi'   =>  'admin/lhu/v_laporan',
+                    'user' => $this->session->userdata['first_name'],
+                    'lhu' => $this->M_lhu->allData(),
+                    'dataLevel' => $dataLevel,
+                );
+                // var_dump($data);
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
+            }
         }
     }
 
@@ -104,65 +114,71 @@ class Lhu extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $tgl_awal = $this->input->get('tgl_awal');
-            $tgl_akhir = $this->input->get('tgl_akhir');
-            $perusahaan = $this->input->get('nama_perusahaan');
-
-            // ---------------
-            if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
-                // Menampilkan semua data
-                $data = array(
-                    'title' => 'Data lhu',
-                    'isi'   =>  'admin/lhu/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'perusahaan' => $this->M_lhu->ambilPerusahaan(),
-                    'lhu' => $this->M_lhu->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
-                    'dataLevel' => $dataLevel,
-                );
-            } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
-                // Menampilkan data berdasarkan perusahaan
-                $data = array(
-                    'title' => 'Data lhu',
-                    'isi'   =>  'admin/lhu/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'perusahaan' => $this->M_lhu->ambilPerusahaan(),
-                    'lhu' => $this->M_lhu->get_filtered_dataPerusahaan($perusahaan),
-                    'dataLevel' => $dataLevel,
-                );
-            } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
-                // Menampilkan data berdasarkan rentang tanggal
-                $data = array(
-                    'title' => 'Data lhu',
-                    'isi'   =>  'admin/lhu/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'perusahaan' => $this->M_lhu->ambilPerusahaan(),
-                    'lhu' => $this->M_lhu->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
-                    'dataLevel' => $dataLevel,
-                );
-            } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
-                // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
-                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
-                redirect('lhu/laporan');
-            } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
-                // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
-                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
-                redirect('lhu/laporan');
-            } else {
-                // Kondisi default jika tidak ada form yang terisi
-                $data = array(
-                    'title' => 'Data lhu',
-                    'isi'   =>  'admin/lhu/v_laporan',
-                    'user' => $this->session->userdata['first_name'],
-                    'perusahaan' => $this->M_lhu->ambilPerusahaan(),
-                    'lhu' => $this->M_lhu->allData(),
-                    'dataLevel' => $dataLevel,
-                );
+            if($dataLevel == "is_admin"){
+                $tgl_awal = $this->input->get('tgl_awal');
+                $tgl_akhir = $this->input->get('tgl_akhir');
+                $perusahaan = $this->input->get('nama_perusahaan');
+    
+                // ---------------
+                if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
+                    // Menampilkan semua data
+                    $data = array(
+                        'title' => 'Data lhu',
+                        'isi'   =>  'admin/lhu/v_laporan',
+                        'user' => $this->session->userdata['first_name'],
+                        'perusahaan' => $this->M_lhu->ambilPerusahaan(),
+                        'lhu' => $this->M_lhu->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
+                        'dataLevel' => $dataLevel,
+                    );
+                } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
+                    // Menampilkan data berdasarkan perusahaan
+                    $data = array(
+                        'title' => 'Data lhu',
+                        'isi'   =>  'admin/lhu/v_laporan',
+                        'user' => $this->session->userdata['first_name'],
+                        'perusahaan' => $this->M_lhu->ambilPerusahaan(),
+                        'lhu' => $this->M_lhu->get_filtered_dataPerusahaan($perusahaan),
+                        'dataLevel' => $dataLevel,
+                    );
+                } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
+                    // Menampilkan data berdasarkan rentang tanggal
+                    $data = array(
+                        'title' => 'Data lhu',
+                        'isi'   =>  'admin/lhu/v_laporan',
+                        'user' => $this->session->userdata['first_name'],
+                        'perusahaan' => $this->M_lhu->ambilPerusahaan(),
+                        'lhu' => $this->M_lhu->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
+                        'dataLevel' => $dataLevel,
+                    );
+                } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
+                    // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
+                    $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                    redirect('lhu/laporan');
+                } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
+                    // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
+                    $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                    redirect('lhu/laporan');
+                } else {
+                    // Kondisi default jika tidak ada form yang terisi
+                    $data = array(
+                        'title' => 'Data lhu',
+                        'isi'   =>  'admin/lhu/v_laporan',
+                        'user' => $this->session->userdata['first_name'],
+                        'perusahaan' => $this->M_lhu->ambilPerusahaan(),
+                        'lhu' => $this->M_lhu->allData(),
+                        'dataLevel' => $dataLevel,
+                    );
+                }
+                // ---------------
+                // $data['sampel'] = $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir);
+                // var_dump($data['sampel']);
+                // die();
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
             }
-            // ---------------
-            // $data['sampel'] = $this->M_sampel->get_filtered_data($tgl_awal, $tgl_akhir);
-            // var_dump($data['sampel']);
-            // die();
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
         }
     }
 
@@ -183,57 +199,64 @@ class Lhu extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $tgl_awal = $this->input->get('tgl_awal'); // Menggunakan input get untuk mendapatkan parameter dari URL
-            $tgl_akhir = $this->input->get('tgl_akhir'); // Menggunakan input get untuk mendapatkan parameter dari URL
-            $perusahaan = $this->input->get('nama_perusahaan');
+            if($dataLevel == "is_admin"){
 
-            // ---------------
-            if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
-                // Menampilkan semua data
-                $data = array(
-                    'lhu' => $this->M_lhu->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
-                );
-            } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
-                // Menampilkan data berdasarkan perusahaan
-                $data = array(
-                    'lhu' => $this->M_lhu->get_filtered_dataPerusahaan($perusahaan),
-                );
-            } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
-                // Menampilkan data berdasarkan rentang tanggal
-                $data = array(
-                    'lhu' => $this->M_lhu->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
-                );
-            } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
-                // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
-                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
-                redirect('lhu/laporan');
-            } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
-                // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
-                $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
-                redirect('lhu/laporan');
-            } else {
-                // Kondisi default jika tidak ada form yang terisi
-                $data = array(
-                    'lhu' => $this->M_lhu->allData(),
-                );
+                $tgl_awal = $this->input->get('tgl_awal'); // Menggunakan input get untuk mendapatkan parameter dari URL
+                $tgl_akhir = $this->input->get('tgl_akhir'); // Menggunakan input get untuk mendapatkan parameter dari URL
+                $perusahaan = $this->input->get('nama_perusahaan');
+    
+                // ---------------
+                if (!empty($tgl_awal) && !empty($tgl_akhir) && !empty($perusahaan)) {
+                    // Menampilkan semua data
+                    $data = array(
+                        'lhu' => $this->M_lhu->get_filtered_data($tgl_awal, $tgl_akhir, $perusahaan),
+                    );
+                } elseif (!empty($perusahaan) && empty($tgl_awal) && empty($tgl_akhir)) {
+                    // Menampilkan data berdasarkan perusahaan
+                    $data = array(
+                        'lhu' => $this->M_lhu->get_filtered_dataPerusahaan($perusahaan),
+                    );
+                } elseif (!empty($tgl_awal) && !empty($tgl_akhir) && empty($perusahaan)) {
+                    // Menampilkan data berdasarkan rentang tanggal
+                    $data = array(
+                        'lhu' => $this->M_lhu->get_filtered_dataTgl($tgl_awal, $tgl_akhir),
+                    );
+                } elseif (!empty($perusahaan) && (empty($tgl_awal) || empty($tgl_akhir))) {
+                    // Mengirimkan flashdata jika form perusahaan diisi tetapi salah satu form tanggal tidak terisi
+                    $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                    redirect('lhu/laporan');
+                } elseif ((empty($tgl_awal) || empty($tgl_akhir)) && !empty($perusahaan)) {
+                    // Mengirimkan flashdata jika hanya salah satu form tanggal yang terisi
+                    $this->session->set_flashdata('error', 'Harap isi kedua form tanggal');
+                    redirect('lhu/laporan');
+                } else {
+                    // Kondisi default jika tidak ada form yang terisi
+                    $data = array(
+                        'lhu' => $this->M_lhu->allData(),
+                    );
+                }
+        
+        
+                // Load library Dompdf
+                $options = new Options();
+                $options->set('isHtml5ParserEnabled', true);
+                $options->set('isPhpEnabled', true);
+        
+                $dompdf = new Dompdf($options);
+        
+                $html = $this->load->view('admin/lhu/cetakLaporan', $data, true);
+                $dompdf->loadHtml($html);
+        
+                $dompdf->setPaper('A4', 'landscape');
+        
+                // Render PDF (stream to browser atau save ke file)
+                $dompdf->render();
+                $dompdf->stream('laporan.pdf', array('Attachment' => 0));
+            }else{
+                
+                redirect('dashboard','refresh');
+                
             }
-    
-    
-            // Load library Dompdf
-            $options = new Options();
-            $options->set('isHtml5ParserEnabled', true);
-            $options->set('isPhpEnabled', true);
-    
-            $dompdf = new Dompdf($options);
-    
-            $html = $this->load->view('admin/lhu/cetakLaporan', $data, true);
-            $dompdf->loadHtml($html);
-    
-            $dompdf->setPaper('A4', 'landscape');
-    
-            // Render PDF (stream to browser atau save ke file)
-            $dompdf->render();
-            $dompdf->stream('laporan.pdf', array('Attachment' => 0));
         }
     }
 
@@ -260,17 +283,23 @@ class Lhu extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $data = array(
-				'title' => 'Data lhu',
-                'isi'   =>  'admin/lhu/v_tambah',
-                'user' => $this->session->userdata['first_name'],
-                'breadcrumbs' => $this->breadcrumbs->render(),
-                'list_sampel' => $this->M_sampel->allData(),
-                'dataLevel' => $dataLevel,
-                'error' => ''
-            );
-            // var_dump($data);
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            if($dataLevel == "is_admin"){
+                $data = array(
+                    'title' => 'Data lhu',
+                    'isi'   =>  'admin/lhu/v_tambah',
+                    'user' => $this->session->userdata['first_name'],
+                    'breadcrumbs' => $this->breadcrumbs->render(),
+                    'list_sampel' => $this->M_sampel->allData(),
+                    'dataLevel' => $dataLevel,
+                    'error' => ''
+                );
+                // var_dump($data);
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
+            }
         }
 	}
 
@@ -297,17 +326,23 @@ class Lhu extends CI_Controller {
         if(empty($this->session->userdata['email'])){
             redirect(site_url().'main/login/');
         }else{
-            $data = array(
-				'title' => 'Data lhu',
-                'isi'   =>  'admin/lhu/v_edit',
-                'user' => $this->session->userdata['first_name'],
-                'breadcrumbs' => $this->breadcrumbs->render(),
-                'dataLevel' => $dataLevel,
-                'list_sampel' => $this->M_sampel->allData(),
-                'cek' => $this->M_lhu->getData($no_lhu)
-            );
-            // var_dump($data);
-            $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            if($dataLevel == "is_admin"){
+                $data = array(
+                    'title' => 'Data lhu',
+                    'isi'   =>  'admin/lhu/v_edit',
+                    'user' => $this->session->userdata['first_name'],
+                    'breadcrumbs' => $this->breadcrumbs->render(),
+                    'dataLevel' => $dataLevel,
+                    'list_sampel' => $this->M_sampel->allData(),
+                    'cek' => $this->M_lhu->getData($no_lhu)
+                );
+                // var_dump($data);
+                $this->load->view('admin/layout/v_wrapper', $data, FALSE);
+            }else{
+                
+                redirect('dashboard','refresh');
+                
+            }
         }
 	}
 
@@ -472,38 +507,56 @@ class Lhu extends CI_Controller {
 
     public function hapus($no_lhu)
 	{
-        $ambil = $this->M_lhu->getData($no_lhu);
-        $name = './file_lhu/'.$ambil->file_lhu;
-
-		$data = array('no_lhu' => $no_lhu);
-        if(is_readable($name) && unlink($name)){
-            $this->M_lhu->delete($data);
-            $this->session->set_flashdata('success_message', 'Data Berhasil Dihapus');
-            redirect('lhu ', 'refresh');
+        if($dataLevel == "is_admin"){
+            $ambil = $this->M_lhu->getData($no_lhu);
+            $name = './file_lhu/'.$ambil->file_lhu;
+    
+            $data = array('no_lhu' => $no_lhu);
+            if(is_readable($name) && unlink($name)){
+                $this->M_lhu->delete($data);
+                $this->session->set_flashdata('success_message', 'Data Berhasil Dihapus');
+                redirect('lhu ', 'refresh');
+            }
+        }else{
+            
+            redirect('dashboard','refresh');
+            
         }
 	}
 
     public function unduh($nama_file){
-        $this->load->helper('download');
-        $file = FCPATH . 'file_lhu/' . $nama_file ;
-        // var_dump($file);
-        // die();
-
-        if(file_exists($file)){
-            $tipe_konten = mime_content_type($file);
-
-            force_download($nama_file, file_get_contents($file), $tipe_konten);
+        if($dataLevel == "is_admin"){
+            $this->load->helper('download');
+            $file = FCPATH . 'file_lhu/' . $nama_file ;
+            // var_dump($file);
+            // die();
+    
+            if(file_exists($file)){
+                $tipe_konten = mime_content_type($file);
+    
+                force_download($nama_file, file_get_contents($file), $tipe_konten);
+            }else{
+                echo "File Tidak Ditemukan";
+            }
         }else{
-            echo "File Tidak Ditemukan";
+            
+            redirect('dashboard','refresh');
+            
         }
     }
 
     public function getDataSampel(){
-        $no_sampel = $this->input->get('no_sampel');
-        $sampel_data = $this->M_lhu->getSampelData($no_sampel);
-
-        // Mengembalikan data sebagai JSON
-        echo json_encode($sampel_data);
-        exit;
+        if($dataLevel == "is_admin"){
+            $no_sampel = $this->input->get('no_sampel');
+            $sampel_data = $this->M_lhu->getSampelData($no_sampel);
+    
+            // Mengembalikan data sebagai JSON
+            echo json_encode($sampel_data);
+            exit;
+        }else{
+            
+            redirect('dashboard','refresh');
+            
+        }
     }
 }
