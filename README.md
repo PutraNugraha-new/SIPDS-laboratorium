@@ -1,98 +1,38 @@
-<!-- # What is Dnato System Login?
-Manage member user & login System for CodeIgniter. It's very small, secure (with notification to review activity log in, will Sent via Your Email) and very fast login system, :+1: with bootstrap 3 & Custom Theme.
+# Sistem Informasi Pendataan Data Sampel
 
-Created By me [Abed Putra](https://connectwithdev.com/)
+Sistem Informasi Pendataan Data Sampel adalah sebuah aplikasi berbasis web yang dirancang untuk memudahkan pengelolaan data sampel, lembah hasil uji, laporan, dan pengguna.
 
-<a href="https://www.codefactor.io/repository/github/abedputra/dnato-system-login"><img src="https://www.codefactor.io/repository/github/abedputra/dnato-system-login/badge" alt="CodeFactor" /></a> <a href="https://github.com/abedputra/Dnato-system-login/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/abedputra/Dnato-system-login"></a>
+## Fitur
 
-# Screenshot
-<img width="100%" alt="Dnato System Login" src="https://user-images.githubusercontent.com/11581453/33157448-1e060436-d03d-11e7-9cf0-aeb408316c12.png">
+1. **Login**
 
-<img width="100%" alt="screen shot 2017-11-23 at 11 00 27" src="https://user-images.githubusercontent.com/11581453/33157515-913822ea-d03d-11e7-89a6-cc5395a37800.png">
+   - Pengguna dapat masuk ke dalam sistem dengan menggunakan kredensial yang valid.
 
-# Features
-- Add user
-- Delete user
-- Ban, Unban user
-- Register new user sent to email token
-- Forget password
-- Role user level
-- Edit user profile
-- Gravatar user profile
-- Recaptcha by Google
-- Compress HTML Settings, for more speed
-- Secure Account (Notification to Review Activity Log In, Will Sent via Email like Google) :new: :tada:
-- Active or Inactive Recaptcha :new:
-- Add Settings :new:
-- Add Theme :new: :tada:
+2. **Kelola Data Sampel**
 
-# Settings
-- database.php
-```
-'hostname' => 'localhost', 'username' => '', 'password' => '', 'database' => '',
-```
+   - Tambah, ubah, dan hapus data sampel.
+   - Tampilkan daftar data sampel dengan detail yang relevan.
 
-- config.php
-```
-//Link URL
-$config['base_url'] = 'http://adminweb.com/admin/';
-// Sent email from:
-$config['register'] = 'admin@gmail.com';
-$config['forgot'] = 'admin@gmail.com';
-```
+3. **Kelola Data Lembar Hasil Uji**
 
-- ReCAPTCHA.php (Library)<br>
-```
-private $dataSitekey = ""; //Your SiteKey`
-private $lang = "en"; //Lang ReCAPTCHA
-public $secret = ''; //Secret
-```
+   - Manajemen data lembar hasil uji yang terkait dengan sampel.
+   - Catat dan perbarui informasi hasil uji untuk setiap sampel.
 
-# User Level
-- is_admin
-- is_author
-- is_editor
-- is_subscriber
+4. **Kelola Laporan**
 
-# Install
-- Clone or download
-- Import Sql file
-- Do Settings
-- Done
+   - Lihat laporan secara menyeluruh atau berdasarkan kategori tertentu.
+   - Filter dan sortir data laporan untuk analisis yang lebih baik.
 
-# login
-- Pass : admin
-- User : admin@gmail.com
+5. **Fitur Cetak Laporan**
 
-# Check User Level
-controller.php
-```
-//check user level
-if(empty($data['role'])){
-    redirect(site_url().'main/login/');
-}
-$dataLevel = $this->userlevel->checkLevel($data['role']);
-//check user level
+   - Cetak laporan dalam format yang sesuai untuk kebutuhan pengguna.
+   - Pilih periode waktu atau kriteria lainnya untuk mencetak laporan yang diinginkan.
 
-if($dataLevel == "is_admin"){
-  (your code here)
-}
-```
+6. **Kelola Pengguna**
+   - Tambah, ubah, dan hapus akun pengguna.
+   - Atur peran dan izin pengguna untuk mengelola akses ke dalam sistem.
 
-# About
-Dnato System Login is based on the [codeigniter](https://github.com/bcit-ci/CodeIgniter). Dnato System Login is based frontend on the Bootstrap framework created by  [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
-Password hashing with PBKDF2, Author: [havoc AT defuse.ca](https://github.com/defuse).
-Ported to CodeIgniter by [Richard Thornton](http://twitter.com/RichardThornton).
-CodeIgniter Curl Libraries by [Philip Sturgeon](https://github.com/philsturgeon).
-Theme by [Bootswatch](https://github.com/thomaspark/bootswatch).
+## Persyaratan
 
-# Support me
-Support me at <a href="https://www.patreon.com/abedputra">Patron</a>
-
-# LICENSE
-The MIT License (MIT).
-
-Copyright (c) 2017, Abed Putra.
-
-Please feel free to send me an email if you have any problems.
-Thank you so much, my email : contact@abedputra.my.id. -->
+- PHP 7 atau yang lebih baru
+- MySQL atau database lainnya
