@@ -480,9 +480,8 @@ class Sampel extends CI_Controller {
                     // die();
 
                     //update to database
-                    if($this->M_sampel->edit($edit)){
-                        $this->session->set_flashdata('success_message', 'Berhasil Edit Data.');
-                    }
+                    $this->M_sampel->edit($edit);
+                    $this->session->set_flashdata('success_message', 'Berhasil Edit Data.');
                     redirect(site_url().'sampel');
             }
 	    }else{

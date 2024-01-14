@@ -17,7 +17,7 @@
                                         <div class="col-md-2">
                                             <label for="start_date">Tanggal Awal:</label>
                                             <input type="date" id="start_date" class="form-control" name="tgl_awal">
-                                            <span class="text-warning">Rentang Berdasarkan Tgl Masuk</span>
+                                            <span class="text-warning">Rentang Berdasarkan Tanggal Masuk</span>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="end_date">Tanggal Akhir:</label>

@@ -9,8 +9,8 @@
         ?>
             <div class="form-row d-flex">
                 <div class="form-group col-md-6 me-1">
-                    <label for="no_sampel" class="my-2">No Sampel</label>
-                    <?php echo form_input(array('type'=>'hidden','name'=>'no_sampel', 'id'=> 'no_sampel', 'placeholder'=>'Nomor Sampel', 'class'=>'form-control', 'value' => $sampel->no_sampel)); ?>
+                    <label for="jenis_sampel" class="my-2">Nomor Sampel</label>
+                    <?php echo form_input(array('type'=>'text','readonly'=>'readonly','name'=>'no_sampel', 'id'=> 'no_sampel', 'placeholder'=>'Nomor Sampel', 'class'=>'form-control', 'value' => $sampel->no_sampel)); ?>
                     <?php echo form_error('no_sampel');?>
                     
                     <label for="jenis_sampel" class="my-2">Jenis Sampel</label>

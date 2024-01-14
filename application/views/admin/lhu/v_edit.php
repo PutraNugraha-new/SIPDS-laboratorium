@@ -15,8 +15,8 @@
         ?>
             <div class="form-row d-flex">
                 <div class="form-group col-md-12 me-1">
-                    <!-- <label for="no_lhu" class="my-2">No LHU</label> -->
-                    <?php echo form_input(array('type'=>'hidden','name'=>'no_lhu', 'id'=> 'no_lhu', 'placeholder'=>'Nomor Sampel', 'class'=>'form-control', 'value' => $cek->no_lhu)); ?>
+                    <label for="no_lhu" class="my-2">No LHU</label>
+                    <?php echo form_input(array('type'=>'text','readonly'=>'readonly','name'=>'no_lhu', 'id'=> 'no_lhu', 'placeholder'=>'Nomor Sampel', 'class'=>'form-control', 'value' => $cek->no_lhu)); ?>
                     <?php echo form_error('no_lhu');?>
                     
                     <label for="no_sampel" class="my-2">No Sampel</label>

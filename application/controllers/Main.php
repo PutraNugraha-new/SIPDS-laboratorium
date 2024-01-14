@@ -181,9 +181,8 @@ class Main extends CI_Controller {
                     // die();
 
                     //update to database
-                    if($this->user_model->edit($edit)){
-                        $this->session->set_flashdata('success_message', 'Berhasil Edit Data.');
-                    }
+                    $this->user_model->edit($edit);
+                    $this->session->set_flashdata('success_message', 'Berhasil Edit Data.');
                     redirect(site_url().'main/pengguna');
             }
 	    }else{

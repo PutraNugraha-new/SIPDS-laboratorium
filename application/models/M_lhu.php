@@ -22,6 +22,7 @@ class M_lhu extends CI_Model {
     public function allData(){
         $this->db->select('*');
         $this->db->from('tb_lhu');
+        $this->db->order_by('tb_lhu.tgl_selesai', 'ASC');
         return $this->db->get()->result();
     }
 

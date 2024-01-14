@@ -526,7 +526,7 @@ class Lhu extends CI_Controller {
                 // die();
 
                 $this->M_lhu->edit($tambah);
-                $this->session->set_flashdata('flash_message', 'Berhasil Mengubah Data');
+                $this->session->set_flashdata('success_message', 'Berhasil Edit Data.');
                 redirect('lhu', 'refresh');
             }
         } else {
