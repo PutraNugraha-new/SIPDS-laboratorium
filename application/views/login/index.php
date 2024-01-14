@@ -44,16 +44,13 @@
             echo $html;
         }
     ?>
-    <div class="judul">
-        <p>Sistem Informasi Pengelolaan data Sampel dan Lembar Hasil Uji</p>
-        <p>UPTD Laboratorium Lingkungan Kota Palangkaraya</p>
-        <img src="<?= base_url() ?>public/image/logo-dlh.png" alt="logo-dlh" class="img-fluid" width="140">
-    </div>
-<div class="d-flex justify-content-center align-items-center container-fluid">
+<div class="d-flex justify-content-center align-items-center container-fluid my-5">
     <div class="login justify-content-center d-flex flex-column">
-        <!-- <div class="login-header d-flex justify-content-center">
-            <img src="<?= base_url() ?>assets/images/logo/kpu.png" alt="logo-kpu">
-        </div> -->
+        <div class="judul">
+            <p>Sistem Informasi Pengelolaan data Sampel dan Lembar Hasil Uji</p>
+            <p>UPTD Laboratorium Lingkungan Kota Palangkaraya</p>
+            <img src="<?= base_url() ?>public/image/logo-dlh.png" alt="logo-dlh" class="img-fluid" width="140">
+        </div>
         <div class="form-login">
             <?php $fattr = array('class' => 'form-signin');
                 echo form_open(site_url().'main/login/', $fattr); 

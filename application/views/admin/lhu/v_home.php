@@ -42,12 +42,12 @@
                                         <?php $no=1; foreach($lhu as $data) :?>
                                         <tr>
                                             <td><?= $no ?></td>
-                                            <td><?= $data->no_lhu; ?></td>
+                                            <td><?= str_replace('-', '/',$data->no_lhu); ?></td>
                                             <td><?= $data->no_sampel; ?></td>
                                             <td><?= $data->nama_perusahaan; ?></td>
                                             <td><?= $data->tgl_selesai; ?></td>
                                             <td>
-                                                <a href="<?= base_url() ?>lhu/edit/<?= $data->no_lhu; ?>" class="btn btn-info p-1 my-1 text-light"><i class="fas fa-pencil"></i></a>
+                                                <a href="<?= base_url() ?>lhu/edit/<?= $data->no_lhu ?>" class="btn btn-info p-1 my-1 text-light"><i class="fas fa-pencil"></i></a>
                                                 <a href="<?= base_url() ?>lhu/hapus/<?= $data->no_lhu ?>" class="btn btn-danger p-1 my-1 text-light" onClick="return confirm('Ingin Menghapus?')"><i class="fas fa-trash"></i></a>
                                                 <a href="<?= base_url() ?>lhu/unduh/<?= $data->file_lhu ?>" class="btn btn-success p-1 my-1 text-light"><i class="fas fa-print"></i></a>
                                             </td>

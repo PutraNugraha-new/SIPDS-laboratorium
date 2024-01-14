@@ -36,7 +36,7 @@
             </div>
             <div class="row my-3">
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" class="btn btn-primary">Ubah</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </div>
             </div>

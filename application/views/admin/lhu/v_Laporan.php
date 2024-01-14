@@ -59,7 +59,7 @@
                                         <?php $no = 1; foreach($lhu as $data): ?>
                                         <tr>
                                             <td><?= $no; ?></td>
-                                            <td><?= $data->no_lhu; ?></td>
+                                            <td><?= str_replace('-', '/', $data->no_lhu); ?></td>
                                             <td><?= $data->no_sampel; ?></td>
                                             <td><?= $data->nama_perusahaan; ?></td>
                                             <td><?= $data->tgl_selesai; ?></td>

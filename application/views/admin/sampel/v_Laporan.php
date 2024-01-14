@@ -86,7 +86,7 @@
                                             <td><?= $data->alamat; ?></td>
                                             <td><?= $data->tgl_masuk; ?></td>
                                             <td><?= $data->tgl_selesai; ?></td>
-                                            <td><?= $data->no_lhu; ?></td>
+                                            <td class="text-wrap" style="overflow-wrap:break-word;"><?= $result = empty($data->no_lhu) ? "Tidak ada" : str_replace('-', '/', $data->no_lhu); ?></td>
                                             <td><?= $data->no_handphone; ?></td>
                                             <td><?= $data->keterangan; ?></td>
                                         </tr>

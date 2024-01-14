@@ -37,15 +37,15 @@
                     <?php echo form_error('tgl_selesai');?>
                     
                     <label for="file_lhu" class="my-2">File LHU : <span class="text-success"><?php if($cek->file_lhu == NULL){echo "Tidak Ada File";}else{echo $cek->file_lhu;} ?></span></label>
-                    <input type="file" name="file_lhu" id="file_lhu" class="form-control">
+                    <input type="file" name="file_lhu" id="file_lhu" class="form-control" accept=".doc, .docx, .pdf, .jpg, .png">
                     <?php echo form_error('file_lhu');?>
                 </div>
 
             </div>
             <div class="row my-3">
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="submit" class="btn btn-primary">Ubah</button>
+                    <button type="reset" class="btn btn-danger">Batal</button>
                 </div>
             </div>
         <?php echo form_close(); ?>

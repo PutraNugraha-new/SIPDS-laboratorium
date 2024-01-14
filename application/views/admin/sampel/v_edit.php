@@ -49,9 +49,9 @@
                     
                     <label for="no_lhu" class="my-2">No LHU</label>
                     <select name="no_lhu" class="form-control" id="no_lhu">
-                        <option value="<?= $sampel->no_lhu ?>"><?= $sampel->no_lhu ?></option>
+                        <option value="<?= $sampel->no_lhu ?>"><?= str_replace('-', '/',$sampel->no_lhu) ?></option>
                         <?php foreach($lhu as $data): ?>
-                        <option value="<?= $data->no_lhu ?>"><?= $data->no_lhu ?></option>
+                        <option value="<?= $data->no_lhu ?>"><?= str_replace('-', '/',$data->no_lhu) ?></option>
                         <?php endforeach; ?>
                     </select>
                     <?php echo form_error('no_lhu');?>

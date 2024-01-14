@@ -61,7 +61,7 @@
                                 <td><?= $data->last_login?></td>
                                 <td>
                                     <a href="<?= base_url() ?>main/editPengguna/<?= $data->id; ?>" class="btn btn-info p-1 my-1 text-light"><i class="fas fa-pencil"></i></a>
-                                    <a href="<?= base_url() ?>main/deleteuser/<?= $data->id ?>" onClick="return confirm('Yaking Ingin Menghapus?')" class="btn btn-danger p-1 my-1 text-light"><i class="fas fa-trash"></i></a>
+                                    <a href="<?= base_url() ?>main/deleteuser/<?= $data->id ?>" onClick="return confirm('Ingin Menghapus?')" class="btn btn-danger p-1 my-1 text-light"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             <?php $no++; endforeach; ?>

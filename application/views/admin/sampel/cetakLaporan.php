@@ -8,7 +8,8 @@
 
     <style>
         .cetakLaporan tr td{
-            font-size:12pt;
+            font-size:10pt;
+            overflow-wrap: break-word;
         }
 
         .kop p{
@@ -36,12 +37,15 @@
             background-color: #f2f2f2; /* Optional: Add background color for the headers */
             border:1px solid #000;
             margin-bottom: 10px; /* Add margin to the bottom of the headers */
+            font-size:10pt;
         }
 
         /* Add some styles to the table data cells (optional) */
         td {
             padding: 10px; /* Optional: Add padding for better appearance */
             border: 1px solid #000; /* Optional: Add border to the cells */
+            word-wrap: break-word;
+            /* font-size:5pt; */
         }
 
         /* Optional: Add some styles to the whole table for better appearance */
@@ -97,7 +101,7 @@
             <td><?= $data->alamat; ?></td>
             <td><?= $data->tgl_masuk; ?></td>
             <td><?= $data->tgl_selesai; ?></td>
-            <td><?= $data->no_lhu; ?></td>
+            <td><?= $result = empty($data->no_lhu) ? "Tidak ada" : str_replace('-', '/', $data->no_lhu); ?></td>
             <td><?= $data->no_handphone; ?></td>
             <td><?= $data->keterangan; ?></td>
         </tr>

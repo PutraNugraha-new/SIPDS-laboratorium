@@ -305,6 +305,7 @@ class Lhu extends CI_Controller {
 
     public function edit($no_lhu)
 	{
+        
         $this->breadcrumbs->AddMultipleItems(array(
         'lhu' => base_url() . 'lhu',
         'tambah' => base_url() . index_page() . '/edit'
@@ -403,8 +404,11 @@ class Lhu extends CI_Controller {
                         $upload_data = $this->upload->data();
                     }
                 }
+                $no_lhu_raw = $this->input->post('no_lhu');
+                $no_lhu_sanitized = str_replace('/', '-', $no_lhu_raw);
+
                 $tambah = [
-                    'no_lhu' => $this->input->post('no_lhu'),
+                    'no_lhu' => $no_lhu_sanitized,
                     'no_sampel' => $this->input->post('no_sampel'),
                     'nama_perusahaan' => $this->input->post('nama_perusahaan'),
                     'tgl_selesai' => $this->input->post('tgl_selesai'),
@@ -423,6 +427,9 @@ class Lhu extends CI_Controller {
 
     public function update()
     {
+        $no_lhu = $this->input->post('no_lhu');
+        // var_dump($no_lhu);
+        // die();
         $data = $this->session->userdata;
         if (empty($data['role'])) {
             redirect(site_url() . 'main/login/');
@@ -440,9 +447,9 @@ class Lhu extends CI_Controller {
             $this->form_validation->set_rules('no_sampel', 'Nomor Sampel', 'required');
             $this->form_validation->set_rules('nama_perusahaan', 'Nama Perusahaan', 'required');
             $this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai');
+            // $this->form_validation->set_rules('file_lhu', 'FILE LHU', 'required');
 
             if ($this->form_validation->run() == FALSE) {
-                $no_lhu = $this->input->post('no_lhu');
                 $data = array(
                     'title' => 'Data LHU',
                     'isi'   =>  'admin/lhu/v_edit',
@@ -459,8 +466,6 @@ class Lhu extends CI_Controller {
                 $name = './file_lhu/' . $ambil->file_lhu;
                 $nama = '';
                 $cek_file = $_FILES['file_lhu']['name'];
-                // var_dump($name);
-                // die();
                 // Jika ada file baru diunggah
                 if (!empty($_FILES['file_lhu']['name'])) {
                     if (is_readable($name) && is_file($name) && unlink($name)) {
@@ -476,11 +481,32 @@ class Lhu extends CI_Controller {
                         if (!$this->upload->do_upload('file_lhu')) {
                             $error = array('error' => $this->upload->display_errors());
                             $this->session->set_flashdata('error_message', $error['error']);
+                            var_dump($error['error']);
+                            die();
                             redirect('lhu/edit/' . $no_lhu, 'refresh');
                         } else {
                             $upload_data = $this->upload->data();
                             $nama = $upload_data['file_name'];
-                            // var_dump($nama);
+                        }
+                    }else{
+                        $config['upload_path'] = './file_lhu/';
+                        $config['allowed_types'] = 'jpg|png|pdf|doc|docx'; // Sesuaikan jenis file yang diizinkan
+                        $config['max_size']  = 10000;
+
+                        $this->load->library('upload', $config);
+                        $this->upload->initialize($config);
+                        // var_dump($config);
+                        // die();
+
+                        if (!$this->upload->do_upload('file_lhu')) {
+                            $error = array('error' => $this->upload->display_errors());
+                            $this->session->set_flashdata('error_message', $error['error']);
+                            var_dump($error['error']);
+                            die();
+                            redirect('lhu/edit/' . $no_lhu, 'refresh');
+                        } else {
+                            $upload_data = $this->upload->data();
+                            $nama = $upload_data['file_name'];
                         }
                     }
                 } else {
@@ -495,6 +521,9 @@ class Lhu extends CI_Controller {
                     'tgl_selesai' => $this->input->post('tgl_selesai'),
                     'file_lhu' => $nama
                 ];
+
+                // var_dump($tambah);
+                // die();
 
                 $this->M_lhu->edit($tambah);
                 $this->session->set_flashdata('flash_message', 'Berhasil Mengubah Data');

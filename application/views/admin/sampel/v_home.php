@@ -66,12 +66,12 @@
                                             <td><?= $data->alamat; ?></td>
                                             <td><?= $data->tgl_masuk; ?></td>
                                             <td><?= $data->tgl_selesai; ?></td>
-                                            <td><?= $data->no_lhu; ?></td>
+                                            <td><?= $result = empty($data->no_lhu) ? "Tidak ada" : str_replace('-', '/', $data->no_lhu); ?></td>
                                             <td><?= $data->no_handphone; ?></td>
                                             <td><?= $data->keterangan; ?></td>
                                             <td>
                                                 <a href="<?= base_url() ?>sampel/edit/<?= $data->no_sampel; ?>" class="btn btn-info p-1 my-1 text-light"><i class="fas fa-pencil"></i></a>
-                                                <a href="<?= base_url() ?>sampel/hapus/<?= $data->no_sampel; ?>" class="btn btn-danger p-1 my-1 text-light"><i class="fas fa-trash" onclick="return confirm('yakin?')"></i></a>
+                                                <a href="<?= base_url() ?>sampel/hapus/<?= $data->no_sampel; ?>" class="btn btn-danger p-1 my-1 text-light"><i class="fas fa-trash" onclick="return confirm('Ingin Menghapus?')"></i></a>
                                             </td>
                                         </tr>
                                         <?php $no++; endforeach; ?>

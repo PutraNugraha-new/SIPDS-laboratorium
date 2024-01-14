@@ -22,13 +22,14 @@ body{
 .judul {
     /* background-color: red; */
     text-align: center;
-    margin-top: 5em;
-    color: var(--main-color);
+    margin-top: 2em;
+    color: var(--hitam);
     font-weight: bold;
     font-family: var(--main-font);
 }
 .container-fluid{
-    height: 80vh;
+    /* width: 50%; */
+    /* height: 50vh; */
     margin-top: -5em;
 }
 .login{
