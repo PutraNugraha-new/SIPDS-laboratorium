@@ -13,14 +13,13 @@
 
         <!-- datatables -->
         <!-- <link rel="stylesheet" href="<?= base_url() ?>/assets/css/pages/fontawesome.css"> -->
-        <link rel="stylesheet" href="<?= base_url() ?>/public/extensions/simple-datatables/style.css">
-        <link rel="stylesheet" href="<?= base_url() ?>/public/css/simple-datatables.css">
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 
     </head>
 <body>
     <div class="sampel">
         <h4>Status Sampel</h4>
-        <table class="table table-striped bg-light" id="table1">
+        <table id="datatablesSimple">
             <thead>
                 <tr>
                     <th>No Sampel</th>
@@ -28,6 +27,13 @@
                     <th>Keterangan</th>
                 </tr>
             </thead>
+            <tfoot>
+                <tr>
+                    <th>No Sampel</th>
+                    <th>Nama Perusahaan</th>
+                    <th>Keterangan</th>
+                </tr>
+            </tfoot>
             <tbody>
                 <?php foreach($sampel as $data): ?>
                     <tr>
@@ -47,8 +53,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <!-- datatable -->
-    <script src="<?= base_url() ?>/public/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="<?= base_url() ?>/public/js/simple-datatables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url() ?>public/dashboard/js/datatables-simple-demo.js"></script>
 
     <script>
         function goBack() {

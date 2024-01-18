@@ -23,7 +23,7 @@ class M_sampel extends CI_Model {
         $this->db->select('tb_sampel.*, tb_lhu.no_lhu');
         $this->db->from('tb_sampel');
         $this->db->join('tb_lhu', 'tb_lhu.no_lhu = tb_sampel.no_lhu', 'left');
-        $this->db->order_by('tb_sampel.tgl_masuk', 'ASC'); 
+        $this->db->order_by('tb_sampel.tgl_masuk', 'DESC'); 
         return $this->db->get()->result();
     }
 
