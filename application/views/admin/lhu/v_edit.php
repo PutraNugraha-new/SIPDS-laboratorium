@@ -36,7 +36,15 @@
                     <input type="date" name="tgl_selesai" class="form-control" id="tgl_selesai" value="<?= $cek->tgl_selesai ?>">
                     <?php echo form_error('tgl_selesai');?>
                     
-                    <label for="file_lhu" class="my-2">File LHU : <span class="text-success"><?php if($cek->file_lhu == NULL){echo "Tidak Ada File";}else{echo $cek->file_lhu;} ?></span></label>
+                    <label for="file_lhu" class="my-2">File LHU : 
+                        <span class="text-success">
+                            <?php if($cek->file_lhu == NULL){
+                                    echo "Tidak Ada File";
+                                }else{
+                                    echo $cek->file_lhu;} 
+                            ?>
+                        </span>
+                    </label>
                     <input type="file" name="file_lhu" id="file_lhu" class="form-control" accept=".doc, .docx, .pdf, .jpg, .png">
                     <?php echo form_error('file_lhu');?>
                 </div>

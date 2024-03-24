@@ -37,7 +37,7 @@
                     <?php echo form_error('tanggal_selesai');?>
                     
                     <label for="file_lhu" class="my-2">Pilih File LHU</label>
-                    <input type="file" name="file_lhu" id="file_lhu" class="form-control" accept=".doc, .docx, .pdf, .jpg, .png">
+                    <input type="file" name="file_lhu" id="file_lhu" class="form-control" accept=".doc, .docx, .pdf, .jpg, .png" required>
                     <?php echo form_error('file_lhu');?>
                 </div>
 
